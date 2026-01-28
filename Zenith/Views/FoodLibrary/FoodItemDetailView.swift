@@ -67,6 +67,7 @@ struct FoodItemDetailView: View {
             )
             modelContext.insert(item)
         }
+        try? modelContext.save()
         dismiss()
     }
 }

@@ -407,6 +407,7 @@ struct AddEntryView: View {
             mealType: mealType
         )
         modelContext.insert(entry)
+        try? modelContext.save()
         dismiss()
     }
 }

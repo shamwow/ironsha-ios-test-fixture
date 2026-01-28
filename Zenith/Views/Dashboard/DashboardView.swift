@@ -224,6 +224,7 @@ struct DashboardView: View {
 
                     RecentEntriesCardView(entries: selectedEntries) { entry in
                         modelContext.delete(entry)
+                        try? modelContext.save()
                     }
                     .padding(.horizontal, 16)
                 }
