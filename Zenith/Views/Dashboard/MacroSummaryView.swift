@@ -4,16 +4,15 @@ struct MacroSummaryView: View {
     let protein: Double
     let fat: Double
     let carbs: Double
-
-    private var total: Double {
-        protein + fat + carbs
-    }
+    var proteinGoal: Double = 150
+    var fatGoal: Double = 65
+    var carbsGoal: Double = 250
 
     var body: some View {
         HStack(spacing: 36) {
-            MacroRing(label: "Protein", value: protein, color: .proteinColor, total: total)
-            MacroRing(label: "Fat", value: fat, color: .fatColor, total: total)
-            MacroRing(label: "Carbs", value: carbs, color: .carbsColor, total: total)
+            MacroRing(label: "Protein", value: protein, color: .proteinColor, goal: proteinGoal)
+            MacroRing(label: "Fat", value: fat, color: .fatColor, goal: fatGoal)
+            MacroRing(label: "Carbs", value: carbs, color: .carbsColor, goal: carbsGoal)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
@@ -24,11 +23,11 @@ private struct MacroRing: View {
     let label: String
     let value: Double
     let color: Color
-    let total: Double
+    let goal: Double
 
     private var fraction: Double {
-        guard total > 0 else { return 0 }
-        return min(value / total, 1.0)
+        guard goal > 0 else { return 0 }
+        return min(value / goal, 1.0)
     }
 
     var body: some View {

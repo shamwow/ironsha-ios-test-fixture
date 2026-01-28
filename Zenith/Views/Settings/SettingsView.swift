@@ -7,6 +7,8 @@ struct SettingsView: View {
     @Query private var settings: [UserSettings]
     @State private var isSyncing = false
     @State private var showHeaderTitle = false
+    @State private var editingGoal: GoalType?
+    @State private var editText = ""
 
     private var userSettings: UserSettings? {
         settings.first
@@ -20,7 +22,7 @@ struct SettingsView: View {
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 16))
+                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                         .listRowBackground(Color.clear)
                         .overlay(
                             GeometryReader { geo in
@@ -38,22 +40,20 @@ struct SettingsView: View {
                         )
                 }
 
-                Section("Daily Goal") {
+                Section("Nutrition Goals") {
                     if let s = userSettings {
-                        HStack {
-                            Text("Calorie Goal")
-                            Spacer()
-                            Text("\(s.dailyCalorieGoal) kcal")
-                                .foregroundStyle(.secondary)
+                        GoalRow(label: "Calories", value: "\(s.dailyCalorieGoal)", unit: "kcal") {
+                            editingGoal = .calories; editText = "\(s.dailyCalorieGoal)"
                         }
-                        Slider(
-                            value: Binding(
-                                get: { Double(s.dailyCalorieGoal) },
-                                set: { s.dailyCalorieGoal = Int($0) }
-                            ),
-                            in: 1000...5000,
-                            step: 50
-                        )
+                        GoalRow(label: "Protein", value: "\(Int(s.dailyProteinGoal))", unit: "g") {
+                            editingGoal = .protein; editText = "\(Int(s.dailyProteinGoal))"
+                        }
+                        GoalRow(label: "Fat", value: "\(Int(s.dailyFatGoal))", unit: "g") {
+                            editingGoal = .fat; editText = "\(Int(s.dailyFatGoal))"
+                        }
+                        GoalRow(label: "Carbs", value: "\(Int(s.dailyCarbsGoal))", unit: "g") {
+                            editingGoal = .carbs; editText = "\(Int(s.dailyCarbsGoal))"
+                        }
                     }
                 }
 
@@ -91,7 +91,34 @@ struct SettingsView: View {
                 }
             }
             .safeAreaInset(edge: .top) {
-                Color.clear.frame(height: 44)
+                Color.clear.frame(height: 28)
+            }
+            .alert(
+                editingGoal?.label ?? "",
+                isPresented: Binding(
+                    get: { editingGoal != nil },
+                    set: { if !$0 { editingGoal = nil } }
+                )
+            ) {
+                TextField("0", text: $editText)
+                    .keyboardType(.numberPad)
+                Button("Save") {
+                    if let s = userSettings, let goal = editingGoal,
+                       let val = Double(editText), val > 0 {
+                        switch goal {
+                        case .calories: s.dailyCalorieGoal = Int(val)
+                        case .protein: s.dailyProteinGoal = val
+                        case .fat: s.dailyFatGoal = val
+                        case .carbs: s.dailyCarbsGoal = val
+                        }
+                    }
+                    editingGoal = nil
+                }
+                Button("Cancel", role: .cancel) { editingGoal = nil }
+            } message: {
+                if let goal = editingGoal {
+                    Text("Enter your daily \(goal.label.lowercased()) goal in \(goal.unit)")
+                }
             }
 
             // Floating header overlay
@@ -148,3 +175,41 @@ struct SettingsView: View {
     }
 }
 
+private enum GoalType {
+    case calories, protein, fat, carbs
+
+    var label: String {
+        switch self {
+        case .calories: "Calories"
+        case .protein: "Protein"
+        case .fat: "Fat"
+        case .carbs: "Carbs"
+        }
+    }
+
+    var unit: String {
+        switch self {
+        case .calories: "kcal"
+        case .protein, .fat, .carbs: "grams"
+        }
+    }
+}
+
+private struct GoalRow: View {
+    let label: String
+    let value: String
+    let unit: String
+    let onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            HStack {
+                Text(label)
+                Spacer()
+                Text("\(value) \(unit)")
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .buttonStyle(.plain)
+    }
+}

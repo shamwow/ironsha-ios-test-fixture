@@ -216,7 +216,14 @@ struct DashboardView: View {
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
-                        MacroSummaryView(protein: totalProtein, fat: totalFat, carbs: totalCarbs)
+                        MacroSummaryView(
+                            protein: totalProtein,
+                            fat: totalFat,
+                            carbs: totalCarbs,
+                            proteinGoal: settings.first?.dailyProteinGoal ?? 150,
+                            fatGoal: settings.first?.dailyFatGoal ?? 65,
+                            carbsGoal: settings.first?.dailyCarbsGoal ?? 250
+                        )
                     }
                     .padding(16)
                     .background(.white, in: RoundedRectangle(cornerRadius: 12))
