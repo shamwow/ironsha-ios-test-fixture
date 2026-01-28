@@ -1,7 +1,7 @@
 import Foundation
 
 struct LiveAPIClient: APIClient {
-    private let baseURL = "https://api.example.com/api/v1"
+    private let baseURL = "http://localhost:8080/api/v1"
     private let session = URLSession.shared
     private let encoder: JSONEncoder = {
         let e = JSONEncoder()

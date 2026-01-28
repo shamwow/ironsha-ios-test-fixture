@@ -4,8 +4,13 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var settings: [UserSettings]
-    @State private var showAddEntry = false
     @State private var showSettings = false
+    @State private var showCamera = false
+    @State private var capturedImage: UIImage?
+    @State private var showRecognitionResults = false
+    @State private var selectedCandidate: FoodCandidate?
+    @State private var pendingAddEntry = false
+    @State private var addEntryRequest: AddEntryRequest?
 
     var body: some View {
         NavigationStack {
@@ -14,14 +19,43 @@ struct ContentView: View {
         .safeAreaInset(edge: .bottom) {
             bottomBar
         }
-        .sheet(isPresented: $showAddEntry) {
-            AddEntryView()
+        .sheet(isPresented: $showCamera) {
+            ImagePicker(image: $capturedImage)
+        }
+        .sheet(isPresented: $showRecognitionResults, onDismiss: {
+            if pendingAddEntry {
+                pendingAddEntry = false
+                addEntryRequest = AddEntryRequest(candidate: selectedCandidate)
+            }
+        }) {
+            if let image = capturedImage {
+                FoodRecognitionResultsView(
+                    image: image,
+                    onCandidateSelected: { candidate in
+                        selectedCandidate = candidate
+                        pendingAddEntry = true
+                    },
+                    onManualEntry: {
+                        selectedCandidate = nil
+                        pendingAddEntry = true
+                    }
+                )
+                .tint(Color.theme)
+            }
+        }
+        .sheet(item: $addEntryRequest) { request in
+            AddEntryView(prefillCandidate: request.candidate)
                 .tint(Color.theme)
                 .interactiveDismissDisabled()
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()
                 .tint(Color.theme)
+        }
+        .onChange(of: capturedImage) { _, newImage in
+            if newImage != nil {
+                showRecognitionResults = true
+            }
         }
         .tint(Color.theme)
         .onAppear {
@@ -61,7 +95,8 @@ struct ContentView: View {
 
             // Plus button centered, extending above and below
             AddButton {
-                showAddEntry = true
+                capturedImage = nil
+                showCamera = true
             }
         }
         .padding(.bottom, 8)
@@ -73,6 +108,11 @@ struct ContentView: View {
             try? modelContext.save()
         }
     }
+}
+
+struct AddEntryRequest: Identifiable {
+    let id = UUID()
+    let candidate: FoodCandidate?
 }
 
 private struct AddButton: View {

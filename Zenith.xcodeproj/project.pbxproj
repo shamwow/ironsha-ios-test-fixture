@@ -28,6 +28,7 @@
 		3A3AD7C2AC72443791CBCB8C /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208E92AFEBEF4EDD8D42C75C /* AddEntryView.swift */; };
 		9192146817A1454B9A9B7B39 /* FoodSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C633C6F356240599E20A0FC /* FoodSearchView.swift */; };
 		7B5EA5B44721440C83645184 /* PhotoCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F02B77F16E40459DD55613 /* PhotoCaptureView.swift */; };
+		A1B2C3D4E5F6071829304A5B /* FoodRecognitionResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A3B1C2D4E5F60718293A4B /* FoodRecognitionResultsView.swift */; };
 		EB27C6EE4647462E9BD17977 /* CalorieRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0CC91C42604FBCBC45DFC5 /* CalorieRingView.swift */; };
 		9C695DB9466640C4887723FE /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5911852E428B4B0D8C5D9D47 /* DashboardView.swift */; };
 		88610E62C56A4C72809452B6 /* MacroSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DECB99D46B48618B8C75B2 /* MacroSummaryView.swift */; };
@@ -64,6 +65,7 @@
 		208E92AFEBEF4EDD8D42C75C /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddEntryView.swift"; sourceTree = "<group>"; };
 		2C633C6F356240599E20A0FC /* FoodSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodSearchView.swift"; sourceTree = "<group>"; };
 		11F02B77F16E40459DD55613 /* PhotoCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCaptureView.swift"; sourceTree = "<group>"; };
+		F7A3B1C2D4E5F60718293A4B /* FoodRecognitionResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodRecognitionResultsView.swift"; sourceTree = "<group>"; };
 		1F0CC91C42604FBCBC45DFC5 /* CalorieRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalorieRingView.swift"; sourceTree = "<group>"; };
 		5911852E428B4B0D8C5D9D47 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardView.swift"; sourceTree = "<group>"; };
 		63DECB99D46B48618B8C75B2 /* MacroSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroSummaryView.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				208E92AFEBEF4EDD8D42C75C /* AddEntryView.swift */,
 				2C633C6F356240599E20A0FC /* FoodSearchView.swift */,
 				11F02B77F16E40459DD55613 /* PhotoCaptureView.swift */,
+				F7A3B1C2D4E5F60718293A4B /* FoodRecognitionResultsView.swift */,
 			);
 			path = "AddEntry";
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				3A3AD7C2AC72443791CBCB8C /* AddEntryView.swift in Sources */,
 				9192146817A1454B9A9B7B39 /* FoodSearchView.swift in Sources */,
 				7B5EA5B44721440C83645184 /* PhotoCaptureView.swift in Sources */,
+				A1B2C3D4E5F6071829304A5B /* FoodRecognitionResultsView.swift in Sources */,
 				EB27C6EE4647462E9BD17977 /* CalorieRingView.swift in Sources */,
 				9C695DB9466640C4887723FE /* DashboardView.swift in Sources */,
 				88610E62C56A4C72809452B6 /* MacroSummaryView.swift in Sources */,
