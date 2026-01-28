@@ -38,6 +38,7 @@ struct FoodLibraryView: View {
                 for index in offsets {
                     modelContext.delete(filtered[index])
                 }
+                try? modelContext.save()
             }
         }
         .searchable(text: $searchText, prompt: "Search foods")

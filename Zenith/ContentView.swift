@@ -70,6 +70,7 @@ struct ContentView: View {
     private func bootstrapSettings() {
         if settings.isEmpty {
             modelContext.insert(UserSettings())
+            try? modelContext.save()
         }
     }
 }
