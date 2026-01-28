@@ -57,20 +57,6 @@ struct AddEntryView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            ZStack {
-                // Dismiss layer when autocomplete is showing
-                if showAutoComplete && nameFieldFocused {
-                    Color.clear
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                showAutoComplete = false
-                                nameFieldFocused = false
-                            }
-                        }
-                        .zIndex(1)
-                }
-
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
                     // Large title in content
@@ -249,50 +235,52 @@ struct AddEntryView: View {
             .padding(16)
             .padding(.top, 44)
             .padding(.bottom, 80)
-        }
-        .zIndex(2)
-            }
-
-            // Floating header overlay
-            VStack(spacing: 0) {
-                ZStack {
-                    if showHeaderTitle {
-                        Text("Add Entry")
-                            .font(.headline)
-                            .foregroundStyle(Color.theme)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
-
-                    HStack {
-                        Spacer()
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 28))
-                                .symbolRenderingMode(.hierarchical)
-                                .foregroundStyle(.secondary)
-                        }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if showAutoComplete || nameFieldFocused {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        showAutoComplete = false
+                        nameFieldFocused = false
                     }
                 }
-                .animation(.easeInOut(duration: 0.2), value: showHeaderTitle)
-                .padding(.horizontal, 16)
-                .padding(.top, 14)
-                .padding(.bottom, 20)
-                .background(
-                    LinearGradient(
-                        stops: [
-                            .init(color: Color(.systemGroupedBackground), location: 0),
-                            .init(color: Color(.systemGroupedBackground), location: 0.6),
-                            .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-
-                Spacer()
             }
+        }
+            // Floating header overlay
+            ZStack {
+                if showHeaderTitle {
+                    Text("Add Entry")
+                        .font(.headline)
+                        .foregroundStyle(Color.theme)
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
+                }
+
+                HStack {
+                    Spacer()
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 28))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .animation(.easeInOut(duration: 0.2), value: showHeaderTitle)
+            .padding(.horizontal, 16)
+            .padding(.top, 14)
+            .padding(.bottom, 20)
+            .background(
+                LinearGradient(
+                    stops: [
+                        .init(color: Color(.systemGroupedBackground), location: 0),
+                        .init(color: Color(.systemGroupedBackground), location: 0.6),
+                        .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
         }
         .background(Color(.systemGroupedBackground))
         .safeAreaInset(edge: .bottom) {
