@@ -175,7 +175,7 @@ struct DashboardView: View {
                     .disabled(isToday || isAnimating)
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 32)
             .padding(.vertical, 10)
             .background(
                 LinearGradient(

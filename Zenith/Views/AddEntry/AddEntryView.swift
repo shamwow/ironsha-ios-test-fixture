@@ -64,6 +64,7 @@ struct AddEntryView: View {
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
+                        .padding(.leading, 16)
                         .overlay(
                             GeometryReader { geo in
                                 Color.clear
@@ -358,6 +359,7 @@ struct AddEntryView: View {
                     .foregroundStyle(.secondary.opacity(0.7))
             }
         }
+        .padding(.leading, 16)
     }
 
     private func macroRow(label: String, text: Binding<String>, unit: String = "g") -> some View {
