@@ -177,7 +177,17 @@ struct DashboardView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
-            .background(Color(.systemGroupedBackground))
+            .background(
+                LinearGradient(
+                    stops: [
+                        .init(color: Color(.systemGroupedBackground), location: 0),
+                        .init(color: Color(.systemGroupedBackground), location: 0.6),
+                        .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
             .offset(x: slideOffset)
 
             // Scrollable content
@@ -185,12 +195,18 @@ struct DashboardView: View {
                 VStack(spacing: 16) {
                     CalorieRingView(consumed: totalCalories, goal: calorieGoal)
                         .padding(.horizontal, 16)
-                        .background(
+                        .overlay(
                             GeometryReader { geo in
-                                Color.clear.preference(
-                                    key: CalorieRingVisibilityKey.self,
-                                    value: geo.frame(in: .named("dashScroll")).maxY
-                                )
+                                Color.clear
+                                    .onAppear {
+                                        let maxY = geo.frame(in: .global).maxY
+                                        let shouldShow = maxY < 175
+                                        if shouldShow != showCalorieInHeader { showCalorieInHeader = shouldShow }
+                                    }
+                                    .onChange(of: geo.frame(in: .global).maxY) { _, newValue in
+                                        let shouldShow = newValue < 175
+                                        if shouldShow != showCalorieInHeader { showCalorieInHeader = shouldShow }
+                                    }
                             }
                         )
 
@@ -213,13 +229,6 @@ struct DashboardView: View {
                 }
                 .padding(.top, 8)
                 .padding(.bottom, 100)
-            }
-            .coordinateSpace(name: "dashScroll")
-            .onPreferenceChange(CalorieRingVisibilityKey.self) { maxY in
-                let shouldShow = maxY < 0
-                if shouldShow != showCalorieInHeader {
-                    showCalorieInHeader = shouldShow
-                }
             }
             .offset(x: slideOffset)
         }
@@ -268,10 +277,4 @@ struct DashboardView: View {
     }
 }
 
-private struct CalorieRingVisibilityKey: PreferenceKey {
-    static var defaultValue: CGFloat = .greatestFiniteMagnitude
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
 
