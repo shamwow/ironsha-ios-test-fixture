@@ -111,8 +111,58 @@ struct DashboardView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Fixed header
+        ZStack(alignment: .top) {
+            // Scrollable content
+            ScrollView {
+                VStack(spacing: 16) {
+                    CalorieRingView(consumed: totalCalories, goal: calorieGoal)
+                        .padding(.horizontal, 16)
+                        .overlay(
+                            GeometryReader { geo in
+                                Color.clear
+                                    .onAppear {
+                                        let maxY = geo.frame(in: .global).maxY
+                                        let shouldShow = maxY < 175
+                                        if shouldShow != showCalorieInHeader { showCalorieInHeader = shouldShow }
+                                    }
+                                    .onChange(of: geo.frame(in: .global).maxY) { _, newValue in
+                                        let shouldShow = newValue < 175
+                                        if shouldShow != showCalorieInHeader { showCalorieInHeader = shouldShow }
+                                    }
+                            }
+                        )
+
+                    VStack(spacing: 8) {
+                        Text("Macros")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                        MacroSummaryView(
+                            protein: totalProtein,
+                            fat: totalFat,
+                            carbs: totalCarbs,
+                            proteinGoal: settings.first?.dailyProteinGoal ?? 150,
+                            fatGoal: settings.first?.dailyFatGoal ?? 65,
+                            carbsGoal: settings.first?.dailyCarbsGoal ?? 250
+                        )
+                    }
+                    .padding(16)
+                    .background(.white, in: RoundedRectangle(cornerRadius: 12))
+                    .padding(.horizontal, 16)
+
+                    RecentEntriesCardView(entries: selectedEntries) { entry in
+                        modelContext.delete(entry)
+                        try? modelContext.save()
+                    }
+                    .padding(.horizontal, 16)
+                }
+                .padding(.top, 52)
+                .padding(.bottom, 100)
+            }
+            .offset(x: slideOffset)
+
+            // Fixed header overlay
             HStack {
                 ZStack(alignment: .leading) {
                     if !showCalorieInHeader {
@@ -177,70 +227,9 @@ struct DashboardView: View {
             }
             .padding(.horizontal, 32)
             .padding(.vertical, 10)
-            .background(
-                LinearGradient(
-                    stops: [
-                        .init(color: Color(.systemGroupedBackground), location: 0),
-                        .init(color: Color(.systemGroupedBackground), location: 0.6),
-                        .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-            .offset(x: slideOffset)
-
-            // Scrollable content
-            ScrollView {
-                VStack(spacing: 16) {
-                    CalorieRingView(consumed: totalCalories, goal: calorieGoal)
-                        .padding(.horizontal, 16)
-                        .overlay(
-                            GeometryReader { geo in
-                                Color.clear
-                                    .onAppear {
-                                        let maxY = geo.frame(in: .global).maxY
-                                        let shouldShow = maxY < 175
-                                        if shouldShow != showCalorieInHeader { showCalorieInHeader = shouldShow }
-                                    }
-                                    .onChange(of: geo.frame(in: .global).maxY) { _, newValue in
-                                        let shouldShow = newValue < 175
-                                        if shouldShow != showCalorieInHeader { showCalorieInHeader = shouldShow }
-                                    }
-                            }
-                        )
-
-                    VStack(spacing: 8) {
-                        Text("Macros")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-
-                        MacroSummaryView(
-                            protein: totalProtein,
-                            fat: totalFat,
-                            carbs: totalCarbs,
-                            proteinGoal: settings.first?.dailyProteinGoal ?? 150,
-                            fatGoal: settings.first?.dailyFatGoal ?? 65,
-                            carbsGoal: settings.first?.dailyCarbsGoal ?? 250
-                        )
-                    }
-                    .padding(16)
-                    .background(.white, in: RoundedRectangle(cornerRadius: 12))
-                    .padding(.horizontal, 16)
-
-                    RecentEntriesCardView(entries: selectedEntries) { entry in
-                        modelContext.delete(entry)
-                        try? modelContext.save()
-                    }
-                    .padding(.horizontal, 16)
-                }
-                .padding(.top, 8)
-                .padding(.bottom, 100)
-            }
+            .background(Color(.systemGroupedBackground))
             .offset(x: slideOffset)
         }
-        .clipped()
         .background(Color(.systemGroupedBackground))
         .navigationBarHidden(true)
         .sheet(isPresented: $showDatePicker, onDismiss: {
