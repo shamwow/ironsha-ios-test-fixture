@@ -6,11 +6,27 @@ struct AddEntryView: View {
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \FoodItem.name) private var savedFoods: [FoodItem]
 
-    @State private var name = ""
-    @State private var caloriesText = ""
-    @State private var proteinText = ""
-    @State private var fatText = ""
-    @State private var carbsText = ""
+    @State private var name: String
+    @State private var caloriesText: String
+    @State private var proteinText: String
+    @State private var fatText: String
+    @State private var carbsText: String
+
+    init(prefillCandidate: FoodCandidate? = nil) {
+        if let c = prefillCandidate {
+            _name = State(initialValue: c.name)
+            _caloriesText = State(initialValue: "\(c.calories)")
+            _proteinText = State(initialValue: c.proteinGrams > 0 ? "\(c.proteinGrams)" : "")
+            _fatText = State(initialValue: c.fatGrams > 0 ? "\(c.fatGrams)" : "")
+            _carbsText = State(initialValue: c.carbsGrams > 0 ? "\(c.carbsGrams)" : "")
+        } else {
+            _name = State(initialValue: "")
+            _caloriesText = State(initialValue: "")
+            _proteinText = State(initialValue: "")
+            _fatText = State(initialValue: "")
+            _carbsText = State(initialValue: "")
+        }
+    }
     @State private var servings: Double = 1.0
     @State private var mealType = "breakfast"
     @State private var saveAsFood = true
