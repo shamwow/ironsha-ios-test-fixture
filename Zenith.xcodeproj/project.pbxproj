@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		794802C042F741CDA4B75D07 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70291FE47F0C47FBAF58D3A9 /* ContentView.swift */; };
+		2E1D9673D98F477FAF819BAF /* ZenithApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A166F3C36E9D42D4B36AA5FB /* ZenithApp.swift */; };
+		7EEE5005171442BF9E7388EF /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E68F5D3D23455DAD99C391 /* FoodEntry.swift */; };
+		89EBC63FD68B4650A08C7B9B /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B21CFD26C9841FAAA69A786 /* FoodItem.swift */; };
+		C16B3CD0991C47529DFA9EDC /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0B8D478CBB4454960A9FE3 /* UserSettings.swift */; };
+		9FA0037D731A4C0987F29948 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FBB05298C544ADB327F5E6 /* APIClient.swift */; };
+		CB51841F01F4423A96B7F59C /* FoodRecognitionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B114C7038D2243909596C0C6 /* FoodRecognitionRequest.swift */; };
+		99D925C6CDE14EE6A9E5C3B7 /* FoodRecognitionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58C00940A3D4EE6B826E038 /* FoodRecognitionResponse.swift */; };
+		6438EF6CB7444186A4C9D2E2 /* SyncDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED45D44C8A47CCA197648E /* SyncDownloadRequest.swift */; };
+		E6C70843AB794BEF92C536D8 /* SyncDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F0E78BAA84745AE2961E8 /* SyncDownloadResponse.swift */; };
+		6A1865C490D443DAB6982632 /* SyncUploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835035F4C91E4F5EBD915B88 /* SyncUploadRequest.swift */; };
+		AFA9F6A3D55248A79D2B39C5 /* SyncUploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FCA72AF4F141DCB2FC5D1F /* SyncUploadResponse.swift */; };
+		1CD19B0352EC42D0908E1670 /* LiveAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0610096C41A3452FA86FA634 /* LiveAPIClient.swift */; };
+		D708206E5A7D45B684625D86 /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5812803DB54A4C88E958C2 /* MockAPIClient.swift */; };
+		41D3CCCE94394CBE9E98142F /* PhotoRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266C41D80F34A65852B0511 /* PhotoRecognitionService.swift */; };
+		D47B799351864A42BC3744F8 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4011E2C6E74387A908A487 /* SyncService.swift */; };
+		6C1F2D9D23B147379754E15D /* Color+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC0840982D4A6FB433C42C /* Color+Theme.swift */; };
+		8A34142148564489AB650674 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE005096CFB547FB9D09E46A /* Date+Extensions.swift */; };
+		3A3AD7C2AC72443791CBCB8C /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208E92AFEBEF4EDD8D42C75C /* AddEntryView.swift */; };
+		9192146817A1454B9A9B7B39 /* FoodSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C633C6F356240599E20A0FC /* FoodSearchView.swift */; };
+		7B5EA5B44721440C83645184 /* PhotoCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F02B77F16E40459DD55613 /* PhotoCaptureView.swift */; };
+		EB27C6EE4647462E9BD17977 /* CalorieRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0CC91C42604FBCBC45DFC5 /* CalorieRingView.swift */; };
+		9C695DB9466640C4887723FE /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5911852E428B4B0D8C5D9D47 /* DashboardView.swift */; };
+		88610E62C56A4C72809452B6 /* MacroSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DECB99D46B48618B8C75B2 /* MacroSummaryView.swift */; };
+		4E8E149421344C048187EA54 /* RecentEntriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1B429B09C34A02B9693DFE /* RecentEntriesListView.swift */; };
+		410812D0AFA34B1E804F76C2 /* FoodItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF449D987340FFA9CCDA27 /* FoodItemDetailView.swift */; };
+		DC7D114B413A4940B6EC06A7 /* FoodLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB926A1940514B07933287BA /* FoodLibraryView.swift */; };
+		23AE28EB8AD041E786BA5232 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820E74677E4D4D4890118C66 /* DayDetailView.swift */; };
+		B01D7FBB32F943DAAD76389D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C9EAE386F4A6D8F4FCC5E /* HistoryView.swift */; };
+		FE22CB170D8C49558D8F8F1A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10D79491A8F413EB0F323F7 /* SettingsView.swift */; };
+		E485334497D74FE9879F427B /* MacroLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839857F99EF84ED2909ECF60 /* MacroLabel.swift */; };
+		A78BB98A8FA64311BBE5A31F /* NutritionFormFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1CF22314E2439DBD751825 /* NutritionFormFields.swift */; };
+		5E2C46D066FD48F1987044D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47537E876FD546729B4C30A1 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		70291FE47F0C47FBAF58D3A9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView.swift"; sourceTree = "<group>"; };
+		A166F3C36E9D42D4B36AA5FB /* ZenithApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZenithApp.swift"; sourceTree = "<group>"; };
+		63E68F5D3D23455DAD99C391 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodEntry.swift"; sourceTree = "<group>"; };
+		1B21CFD26C9841FAAA69A786 /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodItem.swift"; sourceTree = "<group>"; };
+		BD0B8D478CBB4454960A9FE3 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserSettings.swift"; sourceTree = "<group>"; };
+		E4FBB05298C544ADB327F5E6 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIClient.swift"; sourceTree = "<group>"; };
+		B114C7038D2243909596C0C6 /* FoodRecognitionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodRecognitionRequest.swift"; sourceTree = "<group>"; };
+		F58C00940A3D4EE6B826E038 /* FoodRecognitionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodRecognitionResponse.swift"; sourceTree = "<group>"; };
+		50ED45D44C8A47CCA197648E /* SyncDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SyncDownloadRequest.swift"; sourceTree = "<group>"; };
+		6A0F0E78BAA84745AE2961E8 /* SyncDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SyncDownloadResponse.swift"; sourceTree = "<group>"; };
+		835035F4C91E4F5EBD915B88 /* SyncUploadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SyncUploadRequest.swift"; sourceTree = "<group>"; };
+		44FCA72AF4F141DCB2FC5D1F /* SyncUploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SyncUploadResponse.swift"; sourceTree = "<group>"; };
+		0610096C41A3452FA86FA634 /* LiveAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiveAPIClient.swift"; sourceTree = "<group>"; };
+		CE5812803DB54A4C88E958C2 /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockAPIClient.swift"; sourceTree = "<group>"; };
+		4266C41D80F34A65852B0511 /* PhotoRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoRecognitionService.swift"; sourceTree = "<group>"; };
+		DE4011E2C6E74387A908A487 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SyncService.swift"; sourceTree = "<group>"; };
+		08AC0840982D4A6FB433C42C /* Color+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Theme.swift"; sourceTree = "<group>"; };
+		CE005096CFB547FB9D09E46A /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		208E92AFEBEF4EDD8D42C75C /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddEntryView.swift"; sourceTree = "<group>"; };
+		2C633C6F356240599E20A0FC /* FoodSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodSearchView.swift"; sourceTree = "<group>"; };
+		11F02B77F16E40459DD55613 /* PhotoCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCaptureView.swift"; sourceTree = "<group>"; };
+		1F0CC91C42604FBCBC45DFC5 /* CalorieRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalorieRingView.swift"; sourceTree = "<group>"; };
+		5911852E428B4B0D8C5D9D47 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardView.swift"; sourceTree = "<group>"; };
+		63DECB99D46B48618B8C75B2 /* MacroSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroSummaryView.swift"; sourceTree = "<group>"; };
+		9E1B429B09C34A02B9693DFE /* RecentEntriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentEntriesListView.swift"; sourceTree = "<group>"; };
+		AAEF449D987340FFA9CCDA27 /* FoodItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodItemDetailView.swift"; sourceTree = "<group>"; };
+		AB926A1940514B07933287BA /* FoodLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodLibraryView.swift"; sourceTree = "<group>"; };
+		820E74677E4D4D4890118C66 /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayDetailView.swift"; sourceTree = "<group>"; };
+		9B2C9EAE386F4A6D8F4FCC5E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryView.swift"; sourceTree = "<group>"; };
+		E10D79491A8F413EB0F323F7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
+		839857F99EF84ED2909ECF60 /* MacroLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MacroLabel.swift"; sourceTree = "<group>"; };
+		4A1CF22314E2439DBD751825 /* NutritionFormFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutritionFormFields.swift"; sourceTree = "<group>"; };
+		47537E876FD546729B4C30A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C4C78D7E8E51439C807FCDDE /* Zenith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zenith.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A2C11CCF50E74DA6943AD472 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		092B32298A0D4533AA6F9E77 = {
+			isa = PBXGroup;
+			children = (
+				435FD472264241E09992E2D2 /* Zenith */,
+				B7AB8B242301414299C82DAA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B7AB8B242301414299C82DAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C4C78D7E8E51439C807FCDDE /* Zenith.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		435FD472264241E09992E2D2 /* Zenith */ = {
+			isa = PBXGroup;
+			children = (
+				4D7E43ABA3E24610AA8EACEF /* Models */,
+				10B61C1EEB5F4AE6BC197CBB /* Networking */,
+				038E1233990E4DDCB543C65A /* Services */,
+				966C0AEAEDEB4F118C0D6FB3 /* Utilities */,
+				2A4D44DA77554BDBA91FBAE8 /* Views */,
+				70291FE47F0C47FBAF58D3A9 /* ContentView.swift */,
+				A166F3C36E9D42D4B36AA5FB /* ZenithApp.swift */,
+				47537E876FD546729B4C30A1 /* Assets.xcassets */,
+			);
+			path = "Zenith";
+			sourceTree = "<group>";
+		};
+		4D7E43ABA3E24610AA8EACEF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63E68F5D3D23455DAD99C391 /* FoodEntry.swift */,
+				1B21CFD26C9841FAAA69A786 /* FoodItem.swift */,
+				BD0B8D478CBB4454960A9FE3 /* UserSettings.swift */,
+			);
+			path = "Models";
+			sourceTree = "<group>";
+		};
+		10B61C1EEB5F4AE6BC197CBB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				399A5E0FA5B24DFAA49C95DC /* DTOs */,
+				E4FBB05298C544ADB327F5E6 /* APIClient.swift */,
+				0610096C41A3452FA86FA634 /* LiveAPIClient.swift */,
+				CE5812803DB54A4C88E958C2 /* MockAPIClient.swift */,
+			);
+			path = "Networking";
+			sourceTree = "<group>";
+		};
+		399A5E0FA5B24DFAA49C95DC /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				B114C7038D2243909596C0C6 /* FoodRecognitionRequest.swift */,
+				F58C00940A3D4EE6B826E038 /* FoodRecognitionResponse.swift */,
+				50ED45D44C8A47CCA197648E /* SyncDownloadRequest.swift */,
+				6A0F0E78BAA84745AE2961E8 /* SyncDownloadResponse.swift */,
+				835035F4C91E4F5EBD915B88 /* SyncUploadRequest.swift */,
+				44FCA72AF4F141DCB2FC5D1F /* SyncUploadResponse.swift */,
+			);
+			path = "DTOs";
+			sourceTree = "<group>";
+		};
+		038E1233990E4DDCB543C65A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4266C41D80F34A65852B0511 /* PhotoRecognitionService.swift */,
+				DE4011E2C6E74387A908A487 /* SyncService.swift */,
+			);
+			path = "Services";
+			sourceTree = "<group>";
+		};
+		966C0AEAEDEB4F118C0D6FB3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				08AC0840982D4A6FB433C42C /* Color+Theme.swift */,
+				CE005096CFB547FB9D09E46A /* Date+Extensions.swift */,
+			);
+			path = "Utilities";
+			sourceTree = "<group>";
+		};
+		2A4D44DA77554BDBA91FBAE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AE894ED7D51640DE8DD759C1 /* AddEntry */,
+				9EFD366FC08B499E96ABDD45 /* Dashboard */,
+				7E0549AAF6FB4667BB0D115A /* FoodLibrary */,
+				071C823C39744C33BD2A0615 /* History */,
+				1395F63963D248E9A2D73E72 /* Settings */,
+				5BD9EBBBD50F4694A753651A /* Shared */,
+			);
+			path = "Views";
+			sourceTree = "<group>";
+		};
+		AE894ED7D51640DE8DD759C1 /* AddEntry */ = {
+			isa = PBXGroup;
+			children = (
+				208E92AFEBEF4EDD8D42C75C /* AddEntryView.swift */,
+				2C633C6F356240599E20A0FC /* FoodSearchView.swift */,
+				11F02B77F16E40459DD55613 /* PhotoCaptureView.swift */,
+			);
+			path = "AddEntry";
+			sourceTree = "<group>";
+		};
+		9EFD366FC08B499E96ABDD45 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				1F0CC91C42604FBCBC45DFC5 /* CalorieRingView.swift */,
+				5911852E428B4B0D8C5D9D47 /* DashboardView.swift */,
+				63DECB99D46B48618B8C75B2 /* MacroSummaryView.swift */,
+				9E1B429B09C34A02B9693DFE /* RecentEntriesListView.swift */,
+			);
+			path = "Dashboard";
+			sourceTree = "<group>";
+		};
+		7E0549AAF6FB4667BB0D115A /* FoodLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				AAEF449D987340FFA9CCDA27 /* FoodItemDetailView.swift */,
+				AB926A1940514B07933287BA /* FoodLibraryView.swift */,
+			);
+			path = "FoodLibrary";
+			sourceTree = "<group>";
+		};
+		071C823C39744C33BD2A0615 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				820E74677E4D4D4890118C66 /* DayDetailView.swift */,
+				9B2C9EAE386F4A6D8F4FCC5E /* HistoryView.swift */,
+			);
+			path = "History";
+			sourceTree = "<group>";
+		};
+		1395F63963D248E9A2D73E72 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E10D79491A8F413EB0F323F7 /* SettingsView.swift */,
+			);
+			path = "Settings";
+			sourceTree = "<group>";
+		};
+		5BD9EBBBD50F4694A753651A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				839857F99EF84ED2909ECF60 /* MacroLabel.swift */,
+				4A1CF22314E2439DBD751825 /* NutritionFormFields.swift */,
+			);
+			path = "Shared";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19BBFA15DE2440E6AE9F977B /* Zenith */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4F3FEA2E879478E945EDE8E /* Build configuration list for PBXNativeTarget "Zenith" */;
+			buildPhases = (
+				AA9869D208364F5C81A05C50 /* Sources */,
+				A2C11CCF50E74DA6943AD472 /* Frameworks */,
+				B522606123F14CDF97EA960D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zenith;
+			productName = Zenith;
+			productReference = C4C78D7E8E51439C807FCDDE /* Zenith.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		91A3A06AC10F481589E740FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 0E1FC69200D841E9BD3AD44A /* Build configuration list for PBXProject "Zenith" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 092B32298A0D4533AA6F9E77;
+			productRefGroup = B7AB8B242301414299C82DAA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				19BBFA15DE2440E6AE9F977B /* Zenith */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B522606123F14CDF97EA960D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E2C46D066FD48F1987044D4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA9869D208364F5C81A05C50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				794802C042F741CDA4B75D07 /* ContentView.swift in Sources */,
+				2E1D9673D98F477FAF819BAF /* ZenithApp.swift in Sources */,
+				7EEE5005171442BF9E7388EF /* FoodEntry.swift in Sources */,
+				89EBC63FD68B4650A08C7B9B /* FoodItem.swift in Sources */,
+				C16B3CD0991C47529DFA9EDC /* UserSettings.swift in Sources */,
+				9FA0037D731A4C0987F29948 /* APIClient.swift in Sources */,
+				CB51841F01F4423A96B7F59C /* FoodRecognitionRequest.swift in Sources */,
+				99D925C6CDE14EE6A9E5C3B7 /* FoodRecognitionResponse.swift in Sources */,
+				6438EF6CB7444186A4C9D2E2 /* SyncDownloadRequest.swift in Sources */,
+				E6C70843AB794BEF92C536D8 /* SyncDownloadResponse.swift in Sources */,
+				6A1865C490D443DAB6982632 /* SyncUploadRequest.swift in Sources */,
+				AFA9F6A3D55248A79D2B39C5 /* SyncUploadResponse.swift in Sources */,
+				1CD19B0352EC42D0908E1670 /* LiveAPIClient.swift in Sources */,
+				D708206E5A7D45B684625D86 /* MockAPIClient.swift in Sources */,
+				41D3CCCE94394CBE9E98142F /* PhotoRecognitionService.swift in Sources */,
+				D47B799351864A42BC3744F8 /* SyncService.swift in Sources */,
+				6C1F2D9D23B147379754E15D /* Color+Theme.swift in Sources */,
+				8A34142148564489AB650674 /* Date+Extensions.swift in Sources */,
+				3A3AD7C2AC72443791CBCB8C /* AddEntryView.swift in Sources */,
+				9192146817A1454B9A9B7B39 /* FoodSearchView.swift in Sources */,
+				7B5EA5B44721440C83645184 /* PhotoCaptureView.swift in Sources */,
+				EB27C6EE4647462E9BD17977 /* CalorieRingView.swift in Sources */,
+				9C695DB9466640C4887723FE /* DashboardView.swift in Sources */,
+				88610E62C56A4C72809452B6 /* MacroSummaryView.swift in Sources */,
+				4E8E149421344C048187EA54 /* RecentEntriesListView.swift in Sources */,
+				410812D0AFA34B1E804F76C2 /* FoodItemDetailView.swift in Sources */,
+				DC7D114B413A4940B6EC06A7 /* FoodLibraryView.swift in Sources */,
+				23AE28EB8AD041E786BA5232 /* DayDetailView.swift in Sources */,
+				B01D7FBB32F943DAAD76389D /* HistoryView.swift in Sources */,
+				FE22CB170D8C49558D8F8F1A /* SettingsView.swift in Sources */,
+				E485334497D74FE9879F427B /* MacroLabel.swift in Sources */,
+				A78BB98A8FA64311BBE5A31F /* NutritionFormFields.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5BBC7A19AA6C4077939CA2FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8FF56263A2C84FDF96B50BFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DF666ED6FDA2495286DEEBC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Zenith needs camera access to recognize food from photos.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zenith.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		36A5024516684D4794655889 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Zenith needs camera access to recognize food from photos.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zenith.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E1FC69200D841E9BD3AD44A /* Build configuration list for PBXProject "Zenith" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BBC7A19AA6C4077939CA2FD /* Debug */,
+				8FF56263A2C84FDF96B50BFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4F3FEA2E879478E945EDE8E /* Build configuration list for PBXNativeTarget "Zenith" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF666ED6FDA2495286DEEBC7 /* Debug */,
+				36A5024516684D4794655889 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 91A3A06AC10F481589E740FD /* Project object */;
+}
