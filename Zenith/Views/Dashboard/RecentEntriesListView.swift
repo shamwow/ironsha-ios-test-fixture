@@ -7,6 +7,7 @@ typealias RecentEntriesListView = RecentEntriesCardView
 struct RecentEntriesCardView: View {
     let entries: [FoodEntry]
     let onDelete: (FoodEntry) -> Void
+    var onEdit: ((FoodEntry) -> Void)?
 
     private var groupedEntries: [(String, [FoodEntry])] {
         let mealOrder = ["breakfast", "lunch", "dinner", "snack"]
@@ -62,7 +63,16 @@ struct RecentEntriesCardView: View {
                                 }
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 10)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    onEdit?(entry)
+                                }
                                 .contextMenu {
+                                    Button {
+                                        onEdit?(entry)
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
                                     Button(role: .destructive) {
                                         onDelete(entry)
                                     } label: {
