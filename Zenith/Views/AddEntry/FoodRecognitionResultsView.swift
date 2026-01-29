@@ -13,6 +13,9 @@ struct FoodRecognitionResultsView: View {
     @State private var selectedIDs: Set<String> = []
     @State private var isLoading = true
     @State private var errorMessage: String?
+    @State private var mealType = "snack"
+
+    private let mealTypes = ["breakfast", "lunch", "dinner", "snack"]
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -64,6 +67,18 @@ struct FoodRecognitionResultsView: View {
                             }
                         } header: {
                             Text("Photo Matches")
+                        }
+
+                        Section {
+                            HStack(spacing: 10) {
+                                ForEach(mealTypes, id: \.self) { type in
+                                    mealButton(type)
+                                }
+                            }
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
+                        } header: {
+                            Text("Meal")
                         }
                     }
                     .safeAreaInset(edge: .bottom) {
@@ -163,6 +178,36 @@ struct FoodRecognitionResultsView: View {
         .background(color, in: RoundedRectangle(cornerRadius: 6))
     }
 
+    private func mealButton(_ type: String) -> some View {
+        let isSelected = mealType == type
+        let icon: String = switch type {
+        case "breakfast": "sunrise.fill"
+        case "lunch": "sun.max.fill"
+        case "dinner": "moon.stars.fill"
+        default: "carrot.fill"
+        }
+        return Button {
+            mealType = type
+        } label: {
+            VStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.system(size: 18))
+                    .frame(height: 22)
+                Text(type.capitalized)
+                    .font(.caption2.weight(.medium))
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .background(isSelected ? Color.theme.opacity(0.1) : .white, in: RoundedRectangle(cornerRadius: 12))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isSelected ? Color.theme : Color.gray.opacity(0.2), lineWidth: isSelected ? 2 : 1)
+            )
+            .foregroundStyle(isSelected ? Color.theme : .secondary)
+        }
+        .buttonStyle(.plain)
+    }
+
     private func logSelected() {
         for id in selectedIDs {
             if let candidate = candidates.first(where: { $0.id == id }) {
@@ -171,7 +216,8 @@ struct FoodRecognitionResultsView: View {
                     calories: candidate.calories,
                     proteinGrams: candidate.proteinGrams,
                     fatGrams: candidate.fatGrams,
-                    carbsGrams: candidate.carbsGrams
+                    carbsGrams: candidate.carbsGrams,
+                    mealType: mealType
                 )
                 modelContext.insert(entry)
             }
