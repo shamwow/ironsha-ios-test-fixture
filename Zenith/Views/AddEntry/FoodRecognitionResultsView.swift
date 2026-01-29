@@ -136,30 +136,28 @@ struct FoodRecognitionResultsView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                HStack(spacing: 0) {
-                    nutrientColumn(value: "\(candidate.calories)", label: "Calories")
-                    Divider().padding(.all, 4)
-                    nutrientColumn(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "Protein")
-                    Divider().padding(.all, 4)
-                    nutrientColumn(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "Fat")
-                    Divider().padding(.all, 4)
-                    nutrientColumn(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "Carbs")
+                HStack(spacing: 6) {
+                    nutrientPill(value: "\(candidate.calories)", label: "kcal", color: Color.theme)
+                    nutrientPill(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "P", color: .proteinColor)
+                    nutrientPill(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "F", color: .fatColor)
+                    nutrientPill(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "C", color: .carbsColor)
                 }
-                .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.vertical, 4)
         }
     }
 
-    private func nutrientColumn(value: String, label: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
+    private func nutrientPill(value: String, label: String, color: Color) -> some View {
+        HStack(spacing: 3) {
             Text(value)
-                .font(.subheadline.weight(.semibold))
+                .font(.caption.weight(.semibold))
             Text(label)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+                .font(.caption2.weight(.medium))
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .foregroundStyle(.white)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 5)
+        .background(color, in: RoundedRectangle(cornerRadius: 6))
     }
 
     private func logSelected() {
