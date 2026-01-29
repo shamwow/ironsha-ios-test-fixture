@@ -22,24 +22,9 @@ struct SyncService {
         )
         let unsyncedEntries = (try? modelContext.fetch(descriptor)) ?? []
 
-        let itemDescriptor = FetchDescriptor<FoodItem>()
-        let allItems = (try? modelContext.fetch(itemDescriptor)) ?? []
-
         let request = SyncUploadRequest(
             deviceId: UIDevice.current.identifierForVendor?.uuidString ?? "unknown",
             lastSyncTimestamp: settings.lastSyncDate,
-            foodItems: allItems.map { item in
-                SyncFoodItemDTO(
-                    id: item.id.uuidString,
-                    name: item.name,
-                    calories: item.calories,
-                    proteinGrams: item.proteinGrams,
-                    fatGrams: item.fatGrams,
-                    carbsGrams: item.carbsGrams,
-                    isUserCreated: item.isUserCreated,
-                    createdAt: item.createdAt
-                )
-            },
             foodEntries: unsyncedEntries.map { entry in
                 SyncFoodEntryDTO(
                     id: entry.id.uuidString,

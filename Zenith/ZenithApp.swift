@@ -7,6 +7,6 @@ struct ZenithApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [FoodItem.self, FoodEntry.self, UserSettings.self])
+        .modelContainer(for: [FoodEntry.self, UserSettings.self])
     }
 }
