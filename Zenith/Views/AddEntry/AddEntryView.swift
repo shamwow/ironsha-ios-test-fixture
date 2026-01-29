@@ -4,7 +4,7 @@ import SwiftData
 struct AddEntryView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Query(sort: \FoodItem.name) private var savedFoods: [FoodItem]
+    @Query(sort: \FoodEntry.loggedAt, order: .reverse) private var allEntries: [FoodEntry]
 
     @State private var name: String
     @State private var caloriesText: String
@@ -46,8 +46,6 @@ struct AddEntryView: View {
     }
     @State private var servings: Double
     @State private var mealType: String
-    @State private var saveAsFood = true
-    @State private var selectedFoodItem: FoodItem?
     @State private var showAutoComplete = false
     @State private var showNameError = false
     @State private var showCaloriesError = false
@@ -76,16 +74,18 @@ struct AddEntryView: View {
         !name.trimmingCharacters(in: .whitespaces).isEmpty && calories > 0
     }
 
-    private var filteredFoods: [FoodItem] {
+    private var filteredEntries: [FoodEntry] {
         guard !name.isEmpty else { return [] }
         let query = name.lowercased()
-        return savedFoods.filter { $0.name.lowercased().contains(query) }
-    }
-
-    private var isUsingExistingFood: Bool {
-        if selectedFoodItem != nil { return true }
-        let trimmedName = name.trimmingCharacters(in: .whitespaces).lowercased()
-        return savedFoods.contains { $0.name.lowercased() == trimmedName }
+        // Get unique entries by name, keeping only the most recent (already sorted by loggedAt desc)
+        var seen = Set<String>()
+        return allEntries.filter { entry in
+            let lowerName = entry.name.lowercased()
+            guard lowerName.contains(query) else { return false }
+            guard !seen.contains(lowerName) else { return false }
+            seen.insert(lowerName)
+            return true
+        }
     }
 
     var body: some View {
@@ -126,11 +126,8 @@ struct AddEntryView: View {
                                 if showNameError && !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
                                     showNameError = false
                                 }
-                                if let selected = selectedFoodItem, selected.name != newValue {
-                                    selectedFoodItem = nil
-                                }
                                 withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                    showAutoComplete = !newValue.isEmpty && !filteredFoods.isEmpty && selectedFoodItem == nil
+                                    showAutoComplete = !newValue.isEmpty && !filteredEntries.isEmpty
                                 }
                             }
                             .background(.white, in: RoundedRectangle(cornerRadius: 10))
@@ -149,15 +146,15 @@ struct AddEntryView: View {
                         .overlay(alignment: .top) {
                             if showAutoComplete && nameFieldFocused {
                                 VStack(spacing: 0) {
-                                    ForEach(filteredFoods.prefix(5)) { food in
+                                    ForEach(filteredEntries.prefix(5)) { entry in
                                         Button {
-                                            selectFood(food)
+                                            selectFromEntry(entry)
                                         } label: {
                                             HStack {
                                                 VStack(alignment: .leading, spacing: 2) {
-                                                    Text(food.name)
+                                                    Text(entry.name)
                                                         .foregroundStyle(.primary)
-                                                    Text("\(food.calories) kcal")
+                                                    Text("\(entry.calories) kcal")
                                                         .font(.caption)
                                                         .foregroundStyle(.secondary)
                                                 }
@@ -172,7 +169,7 @@ struct AddEntryView: View {
                                         }
                                         .buttonStyle(.plain)
 
-                                        if food.id != filteredFoods.prefix(5).last?.id {
+                                        if entry.id != filteredEntries.prefix(5).last?.id {
                                             Divider()
                                                 .padding(.horizontal, 12)
                                         }
@@ -343,39 +340,7 @@ struct AddEntryView: View {
                         .shadow(color: isValid ? Color.theme.opacity(0.4) : Color.clear, radius: 8, y: 4)
                 }
 
-                // Save Item button - only show when creating a new food item
-                if !isEditing && !isUsingExistingFood && !name.trimmingCharacters(in: .whitespaces).isEmpty {
-                    Button {
-                        saveAsFood.toggle()
-                    } label: {
-                        HStack(spacing: 10) {
-                            ZStack(alignment: .bottomTrailing) {
-                                Image(systemName: "square.and.arrow.down")
-                                    .font(.system(size: 16, weight: .semibold))
-
-                                Image(systemName: saveAsFood ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                    .font(.system(size: 10, weight: .bold))
-                                    .background(Circle().fill(.white).padding(-1))
-                                    .offset(x: 4, y: 2)
-                            }
-                            Text("Save Item")
-                                .font(.subheadline.weight(.semibold))
-                        }
-                        .foregroundStyle(saveAsFood ? Color.theme : .secondary)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(.white, in: Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(saveAsFood ? Color.theme : Color.gray.opacity(0.3), lineWidth: 2)
-                        )
-                    }
-                    .buttonStyle(.plain)
-                    .transition(.scale.combined(with: .opacity))
-                }
             }
-            .animation(.spring(response: 0.35, dampingFraction: 0.8), value: isUsingExistingFood)
-            .animation(.spring(response: 0.35, dampingFraction: 0.8), value: name.isEmpty)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
         }
@@ -409,13 +374,12 @@ struct AddEntryView: View {
         .padding(12)
     }
 
-    private func selectFood(_ food: FoodItem) {
-        selectedFoodItem = food
-        name = food.name
-        caloriesText = "\(food.calories)"
-        proteinText = food.proteinGrams > 0 ? "\(food.proteinGrams)" : ""
-        fatText = food.fatGrams > 0 ? "\(food.fatGrams)" : ""
-        carbsText = food.carbsGrams > 0 ? "\(food.carbsGrams)" : ""
+    private func selectFromEntry(_ entry: FoodEntry) {
+        name = entry.name
+        caloriesText = "\(entry.calories)"
+        proteinText = entry.proteinGrams > 0 ? "\(entry.proteinGrams)" : ""
+        fatText = entry.fatGrams > 0 ? "\(entry.fatGrams)" : ""
+        carbsText = entry.carbsGrams > 0 ? "\(entry.carbsGrams)" : ""
         showAutoComplete = false
         nameFieldFocused = false
     }
@@ -430,17 +394,6 @@ struct AddEntryView: View {
             entry.servings = servings
             entry.mealType = mealType
         } else {
-            if saveAsFood && !isUsingExistingFood {
-                let foodItem = FoodItem(
-                    name: name.trimmingCharacters(in: .whitespaces),
-                    calories: calories,
-                    proteinGrams: protein,
-                    fatGrams: fat,
-                    carbsGrams: carbs
-                )
-                modelContext.insert(foodItem)
-            }
-
             let entry = FoodEntry(
                 name: name.trimmingCharacters(in: .whitespaces),
                 calories: calories,

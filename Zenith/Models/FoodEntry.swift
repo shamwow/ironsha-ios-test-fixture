@@ -56,16 +56,4 @@ final class FoodEntry {
         self.syncedAt = syncedAt
         self.needsSync = needsSync
     }
-
-    convenience init(from foodItem: FoodItem, servings: Double = 1.0, mealType: String = "snack") {
-        self.init(
-            name: foodItem.name,
-            calories: foodItem.calories,
-            proteinGrams: foodItem.proteinGrams,
-            fatGrams: foodItem.fatGrams,
-            carbsGrams: foodItem.carbsGrams,
-            servings: servings,
-            mealType: mealType
-        )
-    }
 }
