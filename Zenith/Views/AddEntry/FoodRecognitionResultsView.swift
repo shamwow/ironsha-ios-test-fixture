@@ -73,10 +73,13 @@ struct FoodRecognitionResultsView: View {
                             } label: {
                                 Text("Log Selected (\(selectedIDs.count))")
                                     .font(.headline)
+                                    .foregroundStyle(.white)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 12)
+                                    .background(selectedIDs.isEmpty ? Color.gray : Color.theme, in: Capsule())
+                                    .shadow(color: selectedIDs.isEmpty ? Color.clear : Color.theme.opacity(0.4), radius: 8, y: 4)
                             }
-                            .buttonStyle(.borderedProminent)
+                            .buttonStyle(.plain)
                             .disabled(selectedIDs.isEmpty)
 
                             Button {
@@ -91,7 +94,7 @@ struct FoodRecognitionResultsView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 12)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
+                                    Capsule()
                                         .stroke(Color.theme, lineWidth: 1.5)
                                 )
                             }

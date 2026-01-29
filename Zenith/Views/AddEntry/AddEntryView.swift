@@ -322,7 +322,7 @@ struct AddEntryView: View {
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(isValid ? Color.theme : Color.gray, in: RoundedRectangle(cornerRadius: 12))
+                        .background(isValid ? Color.theme : Color.gray, in: Capsule())
                         .shadow(color: isValid ? Color.theme.opacity(0.4) : Color.clear, radius: 8, y: 4)
                 }
 
@@ -347,9 +347,9 @@ struct AddEntryView: View {
                         .foregroundStyle(saveAsFood ? Color.theme : .secondary)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 14)
-                        .background(.white, in: RoundedRectangle(cornerRadius: 12))
+                        .background(.white, in: Capsule())
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
+                            Capsule()
                                 .stroke(saveAsFood ? Color.theme : Color.gray.opacity(0.3), lineWidth: 2)
                         )
                     }
@@ -460,9 +460,9 @@ private struct MealTypeButton: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(.white, in: RoundedRectangle(cornerRadius: 12))
+            .background(.white, in: RoundedRectangle(cornerRadius: 16))
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 16)
                     .stroke(isSelected ? Color.theme : Color.clear, lineWidth: 2)
             )
             .foregroundStyle(isSelected ? Color.theme : .primary)
