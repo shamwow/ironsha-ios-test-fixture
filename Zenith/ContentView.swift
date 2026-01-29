@@ -8,8 +8,7 @@ struct ContentView: View {
     @State private var showCamera = false
     @State private var capturedImage: UIImage?
     @State private var showRecognitionResults = false
-    @State private var selectedCandidate: FoodCandidate?
-    @State private var pendingAddEntry = false
+    @State private var pendingManualEntry = false
     @State private var addEntryRequest: AddEntryRequest?
 
     var body: some View {
@@ -23,21 +22,19 @@ struct ContentView: View {
             ImagePicker(image: $capturedImage)
         }
         .sheet(isPresented: $showRecognitionResults, onDismiss: {
-            if pendingAddEntry {
-                pendingAddEntry = false
-                addEntryRequest = AddEntryRequest(candidate: selectedCandidate)
+            if pendingManualEntry {
+                pendingManualEntry = false
+                addEntryRequest = AddEntryRequest(candidate: nil)
             }
         }) {
             if let image = capturedImage {
                 FoodRecognitionResultsView(
                     image: image,
-                    onCandidateSelected: { candidate in
-                        selectedCandidate = candidate
-                        pendingAddEntry = true
+                    onEntriesSaved: {
+                        // entries already saved via modelContext; just dismiss
                     },
                     onManualEntry: {
-                        selectedCandidate = nil
-                        pendingAddEntry = true
+                        pendingManualEntry = true
                     }
                 )
                 .tint(Color.theme)

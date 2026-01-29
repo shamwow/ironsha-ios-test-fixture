@@ -1,13 +1,16 @@
 import SwiftUI
+import SwiftData
 import UIKit
 
 struct FoodRecognitionResultsView: View {
     let image: UIImage
-    let onCandidateSelected: (FoodCandidate) -> Void
+    let onEntriesSaved: () -> Void
     let onManualEntry: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var candidates: [FoodCandidate] = []
+    @State private var selectedIDs: Set<String> = []
     @State private var isLoading = true
     @State private var errorMessage: String?
 
@@ -42,19 +45,40 @@ struct FoodRecognitionResultsView: View {
 
                         Section {
                             ForEach(candidates) { candidate in
-                                Button {
-                                    onCandidateSelected(candidate)
-                                    dismiss()
-                                } label: {
-                                    candidateRow(candidate)
-                                }
-                                .buttonStyle(.plain)
+                                candidateRow(candidate)
+                                    .contentShape(Rectangle())
+                                    .listRowBackground(
+                                        selectedIDs.contains(candidate.id)
+                                        ? Color.theme.opacity(0.1)
+                                        : Color(.secondarySystemGroupedBackground)
+                                    )
+                                    .onTapGesture {
+                                        withAnimation(.easeInOut(duration: 0.15)) {
+                                            if selectedIDs.contains(candidate.id) {
+                                                selectedIDs.remove(candidate.id)
+                                            } else {
+                                                selectedIDs.insert(candidate.id)
+                                            }
+                                        }
+                                    }
                             }
                         } header: {
                             Text("Photo Matches")
                         }
+                    }
+                    .safeAreaInset(edge: .bottom) {
+                        VStack(spacing: 12) {
+                            Button {
+                                logSelected()
+                            } label: {
+                                Text("Log Selected (\(selectedIDs.count))")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 12)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(selectedIDs.isEmpty)
 
-                        Section {
                             Button {
                                 onManualEntry()
                                 dismiss()
@@ -63,9 +87,20 @@ struct FoodRecognitionResultsView: View {
                                     Image(systemName: "pencil.line")
                                     Text("Enter Manually")
                                 }
-                                .foregroundStyle(Color.theme)
+                                .font(.subheadline.weight(.medium))
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.theme, lineWidth: 1.5)
+                                )
                             }
+                            .foregroundStyle(Color.theme)
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 12)
+                        .padding(.bottom, 8)
+                        .background(.bar)
                     }
                 }
             }
@@ -87,37 +122,62 @@ struct FoodRecognitionResultsView: View {
     }
 
     private func candidateRow(_ candidate: FoodCandidate) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(candidate.name)
-                .font(.headline)
+        HStack(spacing: 12) {
+            Image(systemName: selectedIDs.contains(candidate.id) ? "checkmark.circle.fill" : "circle")
+                .font(.title3)
+                .foregroundStyle(selectedIDs.contains(candidate.id) ? Color.theme : .secondary)
+            VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(candidate.name)
+                        .font(.headline)
 
-            Text(candidate.servingDescription)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                    Text(candidate.servingDescription)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
 
-            HStack(spacing: 0) {
-                nutrientColumn(value: "\(candidate.calories)", label: "Calories")
-                Divider().padding(.vertical, 4)
-                nutrientColumn(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "Protein")
-                Divider().padding(.vertical, 4)
-                nutrientColumn(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "Fat")
-                Divider().padding(.vertical, 4)
-                nutrientColumn(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "Carbs")
+                HStack(spacing: 0) {
+                    nutrientColumn(value: "\(candidate.calories)", label: "Calories")
+                    Divider().padding(.all, 4)
+                    nutrientColumn(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "Protein")
+                    Divider().padding(.all, 4)
+                    nutrientColumn(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "Fat")
+                    Divider().padding(.all, 4)
+                    nutrientColumn(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "Carbs")
+                }
+                .fixedSize(horizontal: false, vertical: true)
             }
-            .fixedSize(horizontal: false, vertical: true)
+            .padding(.vertical, 4)
         }
-        .padding(.vertical, 4)
     }
 
     private func nutrientColumn(value: String, label: String) -> some View {
-        VStack(spacing: 2) {
+        VStack(alignment: .leading, spacing: 2) {
             Text(value)
                 .font(.subheadline.weight(.semibold))
             Text(label)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func logSelected() {
+        for id in selectedIDs {
+            if let candidate = candidates.first(where: { $0.id == id }) {
+                let entry = FoodEntry(
+                    name: candidate.name,
+                    calories: candidate.calories,
+                    proteinGrams: candidate.proteinGrams,
+                    fatGrams: candidate.fatGrams,
+                    carbsGrams: candidate.carbsGrams
+                )
+                modelContext.insert(entry)
+            }
+        }
+        try? modelContext.save()
+        onEntriesSaved()
+        dismiss()
     }
 
     private func recognizeFood() async {
