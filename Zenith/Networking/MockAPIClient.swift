@@ -48,7 +48,6 @@ struct MockAPIClient: APIClient {
 
         return SyncDownloadResponse(
             serverTimestamp: .now,
-            foodItems: [],
             foodEntries: [],
             dailyCalorieGoal: nil
         )
