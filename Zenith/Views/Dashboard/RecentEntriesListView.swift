@@ -74,7 +74,9 @@ struct RecentEntriesCardView: View {
                                         Label("Edit", systemImage: "pencil")
                                     }
                                     Button(role: .destructive) {
-                                        onDelete(entry)
+                                        withAnimation {
+                                            onDelete(entry)
+                                        }
                                     } label: {
                                         Label("Delete", systemImage: "trash")
                                     }

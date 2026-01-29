@@ -262,6 +262,23 @@ struct AddEntryView: View {
                         }
                     }
                 }
+
+                if isEditing {
+                    Button(role: .destructive) {
+                        deleteEntry()
+                    } label: {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Delete Entry")
+                        }
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(.red)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(Color.red.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
+                    }
+                    .padding(.top, 8)
+                }
             }
             .padding(16)
             .padding(.top, 44)
@@ -382,6 +399,14 @@ struct AddEntryView: View {
         carbsText = entry.carbsGrams > 0 ? "\(entry.carbsGrams)" : ""
         showAutoComplete = false
         nameFieldFocused = false
+    }
+
+    private func deleteEntry() {
+        if let entry = editingEntry {
+            modelContext.delete(entry)
+            try? modelContext.save()
+        }
+        dismiss()
     }
 
     private func saveEntry() {
