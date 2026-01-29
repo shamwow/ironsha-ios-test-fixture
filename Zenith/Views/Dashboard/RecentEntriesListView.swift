@@ -44,20 +44,21 @@ struct RecentEntriesCardView: View {
 
                         VStack(spacing: 0) {
                             ForEach(Array(items.enumerated()), id: \.element.id) { index, entry in
-                                HStack {
+                                VStack(alignment: .leading, spacing: 8) {
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(entry.name)
-                                            .font(.body)
+                                            .font(.headline)
                                         Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s")")
                                             .font(.caption)
                                             .foregroundStyle(.secondary)
                                     }
 
-                                    Spacer()
-
-                                    Text("\(entry.totalCalories) kcal")
-                                        .font(.subheadline.monospacedDigit())
-                                        .foregroundStyle(.secondary)
+                                    HStack(spacing: 6) {
+                                        nutrientPill(value: "\(entry.totalCalories)", label: "kcal", color: Color.theme)
+                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalProtein))g", label: "P", color: .proteinColor)
+                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalFat))g", label: "F", color: .fatColor)
+                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalCarbs))g", label: "C", color: .carbsColor)
+                                    }
                                 }
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 10)
@@ -80,5 +81,18 @@ struct RecentEntriesCardView: View {
                 }
             }
         }
+    }
+
+    private func nutrientPill(value: String, label: String, color: Color) -> some View {
+        HStack(spacing: 3) {
+            Text(value)
+                .font(.caption.weight(.semibold))
+            Text(label)
+                .font(.caption2.weight(.medium))
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 5)
+        .background(color, in: RoundedRectangle(cornerRadius: 6))
     }
 }
