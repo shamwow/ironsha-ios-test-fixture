@@ -12,23 +12,40 @@ struct AddEntryView: View {
     @State private var fatText: String
     @State private var carbsText: String
 
-    init(prefillCandidate: FoodCandidate? = nil) {
-        if let c = prefillCandidate {
+    private var editingEntry: FoodEntry?
+
+    private var isEditing: Bool { editingEntry != nil }
+
+    init(prefillCandidate: FoodCandidate? = nil, editingEntry: FoodEntry? = nil) {
+        self.editingEntry = editingEntry
+        if let entry = editingEntry {
+            _name = State(initialValue: entry.name)
+            _caloriesText = State(initialValue: "\(entry.calories)")
+            _proteinText = State(initialValue: entry.proteinGrams > 0 ? "\(entry.proteinGrams)" : "")
+            _fatText = State(initialValue: entry.fatGrams > 0 ? "\(entry.fatGrams)" : "")
+            _carbsText = State(initialValue: entry.carbsGrams > 0 ? "\(entry.carbsGrams)" : "")
+            _servings = State(initialValue: entry.servings)
+            _mealType = State(initialValue: entry.mealType)
+        } else if let c = prefillCandidate {
             _name = State(initialValue: c.name)
             _caloriesText = State(initialValue: "\(c.calories)")
             _proteinText = State(initialValue: c.proteinGrams > 0 ? "\(c.proteinGrams)" : "")
             _fatText = State(initialValue: c.fatGrams > 0 ? "\(c.fatGrams)" : "")
             _carbsText = State(initialValue: c.carbsGrams > 0 ? "\(c.carbsGrams)" : "")
+            _servings = State(initialValue: 1.0)
+            _mealType = State(initialValue: "breakfast")
         } else {
             _name = State(initialValue: "")
             _caloriesText = State(initialValue: "")
             _proteinText = State(initialValue: "")
             _fatText = State(initialValue: "")
             _carbsText = State(initialValue: "")
+            _servings = State(initialValue: 1.0)
+            _mealType = State(initialValue: "breakfast")
         }
     }
-    @State private var servings: Double = 1.0
-    @State private var mealType = "breakfast"
+    @State private var servings: Double
+    @State private var mealType: String
     @State private var saveAsFood = true
     @State private var selectedFoodItem: FoodItem?
     @State private var showAutoComplete = false
@@ -76,7 +93,7 @@ struct AddEntryView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
                     // Large title in content
-                    Text("Add Entry")
+                    Text(isEditing ? "Edit Entry" : "Add Entry")
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
@@ -265,7 +282,7 @@ struct AddEntryView: View {
             // Floating header overlay
             ZStack {
                 if showHeaderTitle {
-                    Text("Add Entry")
+                    Text(isEditing ? "Edit Entry" : "Add Entry")
                         .font(.headline)
                         .foregroundStyle(Color.theme)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -317,7 +334,7 @@ struct AddEntryView: View {
                         }
                     }
                 } label: {
-                    Text("Log Entry")
+                    Text(isEditing ? "Save Changes" : "Log Entry")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -327,7 +344,7 @@ struct AddEntryView: View {
                 }
 
                 // Save Item button - only show when creating a new food item
-                if !isUsingExistingFood && !name.trimmingCharacters(in: .whitespaces).isEmpty {
+                if !isEditing && !isUsingExistingFood && !name.trimmingCharacters(in: .whitespaces).isEmpty {
                     Button {
                         saveAsFood.toggle()
                     } label: {
@@ -404,27 +421,37 @@ struct AddEntryView: View {
     }
 
     private func saveEntry() {
-        if saveAsFood && !isUsingExistingFood {
-            let foodItem = FoodItem(
+        if let entry = editingEntry {
+            entry.name = name.trimmingCharacters(in: .whitespaces)
+            entry.calories = calories
+            entry.proteinGrams = protein
+            entry.fatGrams = fat
+            entry.carbsGrams = carbs
+            entry.servings = servings
+            entry.mealType = mealType
+        } else {
+            if saveAsFood && !isUsingExistingFood {
+                let foodItem = FoodItem(
+                    name: name.trimmingCharacters(in: .whitespaces),
+                    calories: calories,
+                    proteinGrams: protein,
+                    fatGrams: fat,
+                    carbsGrams: carbs
+                )
+                modelContext.insert(foodItem)
+            }
+
+            let entry = FoodEntry(
                 name: name.trimmingCharacters(in: .whitespaces),
                 calories: calories,
                 proteinGrams: protein,
                 fatGrams: fat,
-                carbsGrams: carbs
+                carbsGrams: carbs,
+                servings: servings,
+                mealType: mealType
             )
-            modelContext.insert(foodItem)
+            modelContext.insert(entry)
         }
-
-        let entry = FoodEntry(
-            name: name.trimmingCharacters(in: .whitespaces),
-            calories: calories,
-            proteinGrams: protein,
-            fatGrams: fat,
-            carbsGrams: carbs,
-            servings: servings,
-            mealType: mealType
-        )
-        modelContext.insert(entry)
         try? modelContext.save()
         dismiss()
     }
