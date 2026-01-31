@@ -230,18 +230,18 @@ struct DashboardView: View {
             }
             .padding(.horizontal, 32)
             .padding(.vertical, 10)
-            .background(
-                LinearGradient(
-                    stops: [
-                        .init(color: Color(.systemGroupedBackground), location: 0),
-                        .init(color: Color(.systemGroupedBackground), location: 0.7),
-                        .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .padding(.bottom, -12)
-            )
+            .background(alignment: .bottom) {
+                VStack(spacing: 0) {
+                    Color(.systemGroupedBackground)
+                    LinearGradient(
+                        colors: [Color(.systemGroupedBackground), Color(.systemGroupedBackground).opacity(0)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 12)
+                }
+                .padding(.top, -100)
+            }
             .offset(x: slideOffset)
         }
         .background(Color(.systemGroupedBackground))

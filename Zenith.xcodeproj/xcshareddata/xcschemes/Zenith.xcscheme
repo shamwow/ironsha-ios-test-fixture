@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "278ABF9A3E644B5AADCBEEF2"
+               BlueprintIdentifier = "BBB2C7077A5D4124BCC7D325"
                BuildableName = "Zenith.app"
                BlueprintName = "Zenith"
                ReferencedContainer = "container:Zenith.xcodeproj">
@@ -44,7 +44,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "278ABF9A3E644B5AADCBEEF2"
+            BlueprintIdentifier = "BBB2C7077A5D4124BCC7D325"
             BuildableName = "Zenith.app"
             BlueprintName = "Zenith"
             ReferencedContainer = "container:Zenith.xcodeproj">
@@ -61,7 +61,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "278ABF9A3E644B5AADCBEEF2"
+            BlueprintIdentifier = "BBB2C7077A5D4124BCC7D325"
             BuildableName = "Zenith.app"
             BlueprintName = "Zenith"
             ReferencedContainer = "container:Zenith.xcodeproj">
