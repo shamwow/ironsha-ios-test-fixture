@@ -54,11 +54,11 @@ struct RecentEntriesCardView: View {
                                             .foregroundStyle(.secondary)
                                     }
 
-                                    HStack(spacing: 6) {
-                                        nutrientPill(value: "\(entry.totalCalories)", label: "kcal", color: Color.theme)
-                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalProtein))g", label: "P", color: .proteinColor)
-                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalFat))g", label: "F", color: .fatColor)
-                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalCarbs))g", label: "C", color: .carbsColor)
+                                    FlowLayout(spacing: 6) {
+                                        nutrientPill(value: "\(entry.totalCalories)", label: "calories", color: Color.theme)
+                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalProtein))g", label: "protein", color: .proteinColor)
+                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalFat))g", label: "fat", color: .fatColor)
+                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalCarbs))g", label: "carbs", color: .carbsColor)
                                     }
                                 }
                                 .padding(.horizontal, 16)
