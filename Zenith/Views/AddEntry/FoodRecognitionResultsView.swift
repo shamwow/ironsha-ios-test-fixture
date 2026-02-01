@@ -154,11 +154,11 @@ struct FoodRecognitionResultsView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                HStack(spacing: 6) {
-                    nutrientPill(value: "\(candidate.calories)", label: "kcal", color: Color.theme)
-                    nutrientPill(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "P", color: .proteinColor)
-                    nutrientPill(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "F", color: .fatColor)
-                    nutrientPill(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "C", color: .carbsColor)
+                FlowLayout(spacing: 6) {
+                    nutrientPill(value: "\(candidate.calories)", label: "calories", color: Color.theme)
+                    nutrientPill(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "protein", color: .proteinColor)
+                    nutrientPill(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "fat", color: .fatColor)
+                    nutrientPill(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "carbs", color: .carbsColor)
                 }
             }
             .padding(.vertical, 4)
