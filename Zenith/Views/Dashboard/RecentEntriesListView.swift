@@ -9,13 +9,8 @@ struct RecentEntriesCardView: View {
     let onDelete: (FoodEntry) -> Void
     var onEdit: ((FoodEntry) -> Void)?
 
-    private var groupedEntries: [(String, [FoodEntry])] {
-        let mealOrder = ["breakfast", "lunch", "dinner", "snack"]
-        let grouped = Dictionary(grouping: entries, by: \.mealType)
-        return mealOrder.compactMap { meal in
-            guard let items = grouped[meal], !items.isEmpty else { return nil }
-            return (meal, items)
-        }
+    private var sortedEntries: [FoodEntry] {
+        entries.sorted { $0.loggedAt > $1.loggedAt }
     }
 
     var body: some View {
@@ -34,64 +29,52 @@ struct RecentEntriesCardView: View {
             .padding(.vertical, 32)
             .background(.white, in: RoundedRectangle(cornerRadius: 12))
         } else {
-            VStack(spacing: 12) {
-                ForEach(groupedEntries, id: \.0) { mealType, items in
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(mealType.capitalized)
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal, 16)
-                            .padding(.bottom, 8)
-
-                        VStack(spacing: 0) {
-                            ForEach(Array(items.enumerated()), id: \.element.id) { index, entry in
-                                VStack(alignment: .leading, spacing: 8) {
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text(entry.name)
-                                            .font(.headline)
-                                        Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s")")
-                                            .font(.caption)
-                                            .foregroundStyle(.secondary)
-                                    }
-
-                                    FlowLayout(spacing: 6) {
-                                        nutrientPill(value: "\(entry.totalCalories)", label: "calories", color: Color.theme)
-                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalProtein))g", label: "protein", color: .proteinColor)
-                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalFat))g", label: "fat", color: .fatColor)
-                                        nutrientPill(value: "\(String(format: "%.0f", entry.totalCarbs))g", label: "carbs", color: .carbsColor)
-                                    }
-                                }
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 10)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    onEdit?(entry)
-                                }
-                                .contextMenu {
-                                    Button {
-                                        onEdit?(entry)
-                                    } label: {
-                                        Label("Edit", systemImage: "pencil")
-                                    }
-                                    Button(role: .destructive) {
-                                        withAnimation {
-                                            onDelete(entry)
-                                        }
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                }
-
-                                if index < items.count - 1 {
-                                    Divider()
-                                        .padding(.leading, 16)
-                                }
-                            }
+            VStack(spacing: 0) {
+                ForEach(Array(sortedEntries.enumerated()), id: \.element.id) { index, entry in
+                    VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(entry.name)
+                                .font(.headline)
+                            Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
-                        .background(.white, in: RoundedRectangle(cornerRadius: 12))
+
+                        FlowLayout(spacing: 6) {
+                            nutrientPill(value: "\(entry.totalCalories)", label: "calories", color: Color.theme)
+                            nutrientPill(value: "\(String(format: "%.0f", entry.totalProtein))g", label: "protein", color: .proteinColor)
+                            nutrientPill(value: "\(String(format: "%.0f", entry.totalFat))g", label: "fat", color: .fatColor)
+                            nutrientPill(value: "\(String(format: "%.0f", entry.totalCarbs))g", label: "carbs", color: .carbsColor)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onEdit?(entry)
+                    }
+                    .contextMenu {
+                        Button {
+                            onEdit?(entry)
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                        Button(role: .destructive) {
+                            withAnimation {
+                                onDelete(entry)
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+
+                    if index < sortedEntries.count - 1 {
+                        Divider()
+                            .padding(.leading, 16)
                     }
                 }
             }
+            .background(.white, in: RoundedRectangle(cornerRadius: 12))
         }
     }
 
