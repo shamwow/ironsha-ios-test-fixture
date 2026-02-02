@@ -25,7 +25,6 @@ struct AddEntryView: View {
             _fatText = State(initialValue: entry.fatGrams > 0 ? "\(entry.fatGrams)" : "")
             _carbsText = State(initialValue: entry.carbsGrams > 0 ? "\(entry.carbsGrams)" : "")
             _servings = State(initialValue: entry.servings)
-            _mealType = State(initialValue: entry.mealType)
         } else if let c = prefillCandidate {
             _name = State(initialValue: c.name)
             _caloriesText = State(initialValue: "\(c.calories)")
@@ -33,7 +32,6 @@ struct AddEntryView: View {
             _fatText = State(initialValue: c.fatGrams > 0 ? "\(c.fatGrams)" : "")
             _carbsText = State(initialValue: c.carbsGrams > 0 ? "\(c.carbsGrams)" : "")
             _servings = State(initialValue: 1.0)
-            _mealType = State(initialValue: "breakfast")
         } else {
             _name = State(initialValue: "")
             _caloriesText = State(initialValue: "")
@@ -41,18 +39,14 @@ struct AddEntryView: View {
             _fatText = State(initialValue: "")
             _carbsText = State(initialValue: "")
             _servings = State(initialValue: 1.0)
-            _mealType = State(initialValue: "breakfast")
         }
     }
     @State private var servings: Double
-    @State private var mealType: String
     @State private var showAutoComplete = false
     @State private var showNameError = false
     @State private var showCaloriesError = false
     @State private var showHeaderTitle = false
     @FocusState private var nameFieldFocused: Bool
-
-    private let mealTypes = ["breakfast", "lunch", "dinner", "snack"]
 
     private var calories: Int {
         Int(caloriesText) ?? 0
@@ -251,18 +245,6 @@ struct AddEntryView: View {
                     .background(.white, in: RoundedRectangle(cornerRadius: 10))
                 }
 
-                // Meal type selector
-                HStack(spacing: 12) {
-                    ForEach(mealTypes, id: \.self) { type in
-                        MealTypeButton(
-                            type: type,
-                            isSelected: mealType == type
-                        ) {
-                            mealType = type
-                        }
-                    }
-                }
-
                 if isEditing {
                     Button(role: .destructive) {
                         deleteEntry()
@@ -417,7 +399,6 @@ struct AddEntryView: View {
             entry.fatGrams = fat
             entry.carbsGrams = carbs
             entry.servings = servings
-            entry.mealType = mealType
         } else {
             let entry = FoodEntry(
                 name: name.trimmingCharacters(in: .whitespaces),
@@ -425,8 +406,7 @@ struct AddEntryView: View {
                 proteinGrams: protein,
                 fatGrams: fat,
                 carbsGrams: carbs,
-                servings: servings,
-                mealType: mealType
+                servings: servings
             )
             modelContext.insert(entry)
         }
@@ -435,44 +415,4 @@ struct AddEntryView: View {
     }
 }
 
-private struct MealTypeButton: View {
-    let type: String
-    let isSelected: Bool
-    let action: () -> Void
-
-    private var icon: String {
-        switch type {
-        case "breakfast": return "sunrise.fill"
-        case "lunch": return "sun.max.fill"
-        case "dinner": return "moon.stars.fill"
-        case "snack": return "carrot.fill"
-        default: return "fork.knife"
-        }
-    }
-
-    private var label: String {
-        type.capitalized
-    }
-
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: 8) {
-                Image(systemName: icon)
-                    .font(.system(size: 24))
-                    .frame(height: 28)
-                Text(label)
-                    .font(.caption.weight(.medium))
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(.white, in: RoundedRectangle(cornerRadius: 16))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(isSelected ? Color.theme : Color.clear, lineWidth: 2)
-            )
-            .foregroundStyle(isSelected ? Color.theme : .primary)
-        }
-        .buttonStyle(.plain)
-    }
-}
 

@@ -22,6 +22,10 @@ struct DayDetailView: View {
         entries.reduce(0) { $0 + $1.totalCarbs }
     }
 
+    private var sortedEntries: [FoodEntry] {
+        entries.sorted { $0.loggedAt > $1.loggedAt }
+    }
+
     var body: some View {
         List {
             Section {
@@ -37,26 +41,19 @@ struct DayDetailView: View {
                     .listRowBackground(Color.clear)
             }
 
-            let grouped = Dictionary(grouping: entries, by: \.mealType)
-            let mealOrder = ["breakfast", "lunch", "dinner", "snack"]
-
-            ForEach(mealOrder, id: \.self) { meal in
-                if let items = grouped[meal], !items.isEmpty {
-                    Section(meal.capitalized) {
-                        ForEach(items, id: \.id) { entry in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(entry.name)
-                                    Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s")")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                                Spacer()
-                                Text("\(entry.totalCalories) kcal")
-                                    .font(.subheadline.monospacedDigit())
-                                    .foregroundStyle(.secondary)
-                            }
+            Section {
+                ForEach(sortedEntries, id: \.id) { entry in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(entry.name)
+                            Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
+                        Spacer()
+                        Text("\(entry.totalCalories) kcal")
+                            .font(.subheadline.monospacedDigit())
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
