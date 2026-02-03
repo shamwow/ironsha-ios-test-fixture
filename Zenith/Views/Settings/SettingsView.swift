@@ -150,9 +150,9 @@ struct SettingsView: View {
                 .background(
                     LinearGradient(
                         stops: [
-                            .init(color: Color(.systemGroupedBackground), location: 0),
-                            .init(color: Color(.systemGroupedBackground), location: 0.6),
-                            .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
+                            .init(color: Color.surfaceBackground, location: 0),
+                            .init(color: Color.surfaceBackground, location: 0.6),
+                            .init(color: Color.surfaceBackground.opacity(0), location: 1.0),
                         ],
                         startPoint: .top,
                         endPoint: .bottom

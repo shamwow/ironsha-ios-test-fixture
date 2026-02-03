@@ -149,7 +149,7 @@ struct DashboardView: View {
                         )
                     }
                     .padding(16)
-                    .background(.white, in: RoundedRectangle(cornerRadius: 12))
+                    .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
                     .padding(.horizontal, 16)
                     
                     RecentEntriesCardView(entries: selectedEntries, onDelete: { entry in
@@ -233,7 +233,7 @@ struct DashboardView: View {
             .offset(x: slideOffset)
             .background(.ultraThinMaterial)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color.surfaceBackground)
         .navigationBarHidden(true)
         .sheet(isPresented: $showDatePicker, onDismiss: {
             applyPickerDate(pickerDate)

@@ -50,7 +50,7 @@ struct FoodRecognitionResultsView: View {
                                     .listRowBackground(
                                         selectedIDs.contains(candidate.id)
                                         ? Color.theme.opacity(0.1)
-                                        : Color(.secondarySystemGroupedBackground)
+                                        : Color.secondarySurfaceBackground
                                     )
                                     .onTapGesture {
                                         withAnimation(.easeInOut(duration: 0.15)) {
@@ -74,10 +74,10 @@ struct FoodRecognitionResultsView: View {
                             } label: {
                                 Text("Log Selected (\(selectedIDs.count))")
                                     .font(.headline)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(Color.cardBackground)
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 12)
-                                    .background(selectedIDs.isEmpty ? Color.gray : Color.theme, in: Capsule())
+                                    .background(selectedIDs.isEmpty ? Color.subtle : Color.theme, in: Capsule())
                                     .shadow(color: selectedIDs.isEmpty ? Color.clear : Color.theme.opacity(0.4), radius: 8, y: 4)
                             }
                             .buttonStyle(.plain)
@@ -158,7 +158,7 @@ struct FoodRecognitionResultsView: View {
             Text(label)
                 .font(.caption2.weight(.medium))
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(Color.cardBackground)
         .padding(.horizontal, 8)
         .padding(.vertical, 5)
         .background(color, in: RoundedRectangle(cornerRadius: 6))

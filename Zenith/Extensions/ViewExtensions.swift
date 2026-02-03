@@ -40,13 +40,13 @@ private struct BlurredView: ViewModifier {
                     LinearGradient(
                         colors: [
                             .clear,
-                            Color(.systemGroupedBackground).opacity(0.1),
-                            Color(.systemGroupedBackground).opacity(0.7),
-                            Color(.systemGroupedBackground).opacity(0.9),
-                            Color(.systemGroupedBackground),
-                            Color(.systemGroupedBackground),
-                            Color(.systemGroupedBackground),
-                            Color(.systemGroupedBackground)
+                            Color.surfaceBackground.opacity(0.1),
+                            Color.surfaceBackground.opacity(0.7),
+                            Color.surfaceBackground.opacity(0.9),
+                            Color.surfaceBackground,
+                            Color.surfaceBackground,
+                            Color.surfaceBackground,
+                            Color.surfaceBackground
                         ],
                         startPoint: .bottom,
                         endPoint: .top

@@ -124,7 +124,7 @@ struct AddEntryView: View {
                                     showAutoComplete = !newValue.isEmpty && !filteredEntries.isEmpty
                                 }
                             }
-                            .background(.white, in: RoundedRectangle(cornerRadius: 10))
+                            .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(showNameError ? Color.error : Color.clear, lineWidth: 2)
@@ -169,7 +169,7 @@ struct AddEntryView: View {
                                         }
                                     }
                                 }
-                                .background(.white, in: RoundedRectangle(cornerRadius: 10))
+                                .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                                 .shadow(color: .black.opacity(0.15), radius: 12, y: 4)
                                 .offset(y: 52)
                                 .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
@@ -223,7 +223,7 @@ struct AddEntryView: View {
                         Divider().padding(.leading, 12)
                         macroRow(label: "Carbs", text: $carbsText)
                     }
-                    .background(.white, in: RoundedRectangle(cornerRadius: 10))
+                    .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(showCaloriesError ? Color.error : Color.clear, lineWidth: 2)
@@ -242,7 +242,7 @@ struct AddEntryView: View {
                             .labelsHidden()
                     }
                     .padding(12)
-                    .background(.white, in: RoundedRectangle(cornerRadius: 10))
+                    .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                 }
 
                 if isEditing {
@@ -254,10 +254,10 @@ struct AddEntryView: View {
                             Text("Delete Entry")
                         }
                         .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.red)
+                        .foregroundStyle(Color.destructive)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(Color.red.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
+                        .background(Color.destructive.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
                     }
                     .padding(.top, 8)
                 }
@@ -303,16 +303,16 @@ struct AddEntryView: View {
             .background(
                 LinearGradient(
                     stops: [
-                        .init(color: Color(.systemGroupedBackground), location: 0),
-                        .init(color: Color(.systemGroupedBackground), location: 0.6),
-                        .init(color: Color(.systemGroupedBackground).opacity(0), location: 1.0),
+                        .init(color: Color.surfaceBackground, location: 0),
+                        .init(color: Color.surfaceBackground, location: 0.6),
+                        .init(color: Color.surfaceBackground.opacity(0), location: 1.0),
                     ],
                     startPoint: .top,
                     endPoint: .bottom
                 )
             )
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color.surfaceBackground)
         .safeAreaInset(edge: .bottom) {
             HStack(spacing: 12) {
                 // Log Entry button
@@ -332,10 +332,10 @@ struct AddEntryView: View {
                 } label: {
                     Text(isEditing ? "Save Changes" : "Log Entry")
                         .font(.headline)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color.cardBackground)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(isValid ? Color.theme : Color.gray, in: Capsule())
+                        .background(isValid ? Color.theme : Color.subtle, in: Capsule())
                         .shadow(color: isValid ? Color.theme.opacity(0.4) : Color.clear, radius: 8, y: 4)
                 }
 

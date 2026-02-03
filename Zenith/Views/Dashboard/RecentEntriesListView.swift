@@ -27,7 +27,7 @@ struct RecentEntriesCardView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 32)
-            .background(.white, in: RoundedRectangle(cornerRadius: 12))
+            .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
         } else {
             VStack(spacing: 0) {
                 ForEach(Array(sortedEntries.enumerated()), id: \.element.id) { index, entry in
@@ -74,7 +74,7 @@ struct RecentEntriesCardView: View {
                     }
                 }
             }
-            .background(.white, in: RoundedRectangle(cornerRadius: 12))
+            .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
         }
     }
 
@@ -85,7 +85,7 @@ struct RecentEntriesCardView: View {
             Text(label)
                 .font(.caption2.weight(.medium))
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(Color.cardBackground)
         .padding(.horizontal, 8)
         .padding(.vertical, 5)
         .background(color, in: RoundedRectangle(cornerRadius: 6))
