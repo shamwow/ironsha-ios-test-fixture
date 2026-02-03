@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    @ViewBuilder func `modify`<Content: View>(@ViewBuilder transform: (Self) -> Content) -> Content {
+    func modify<Content: View>(@ViewBuilder transform: (Self) -> Content) -> Content {
         transform(self)
     }
 }

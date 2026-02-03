@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct DayDetailView: View {
     let date: Date
@@ -46,9 +46,11 @@ struct DayDetailView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(entry.name)
-                            Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            Text(
+                                "\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())"
+                            )
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         }
                         Spacer()
                         Text("\(entry.totalCalories) kcal")

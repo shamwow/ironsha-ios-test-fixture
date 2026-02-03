@@ -1,0 +1,15 @@
+--swiftversion 5.0
+--indent 4
+--indentcase false
+--trimwhitespace always
+--voidtype void
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--closingparen balanced
+--maxwidth 120
+--semicolons never
+--commas always
+--stripunusedargs closure-only
+--ifdef no-indent
+--disable blankLinesAtStartOfScope, blankLinesAtEndOfScope

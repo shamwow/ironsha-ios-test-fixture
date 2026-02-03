@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct AddEntryView: View {
     @Environment(\.modelContext) private var modelContext
@@ -14,7 +14,9 @@ struct AddEntryView: View {
 
     private var editingEntry: FoodEntry?
 
-    private var isEditing: Bool { editingEntry != nil }
+    private var isEditing: Bool {
+        editingEntry != nil
+    }
 
     init(prefillCandidate: FoodCandidate? = nil, editingEntry: FoodEntry? = nil) {
         self.editingEntry = editingEntry
@@ -41,6 +43,7 @@ struct AddEntryView: View {
             _servings = State(initialValue: 1.0)
         }
     }
+
     @State private var servings: Double
     @State private var showAutoComplete = false
     @State private var showNameError = false
@@ -84,8 +87,8 @@ struct AddEntryView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 24) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
                     // Large title in content
                     Text(isEditing ? "Edit Entry" : "Add Entry")
                         .font(.system(size: 34, weight: .bold))
@@ -108,35 +111,35 @@ struct AddEntryView: View {
                         )
 
                     // Name field
-                VStack(alignment: .leading, spacing: 8) {
-                    sectionHeader("Name", required: false)
+                    VStack(alignment: .leading, spacing: 8) {
+                        sectionHeader("Name", required: false)
 
-                    VStack(alignment: .leading, spacing: 4) {
-                        TextField("Enter food name", text: $name)
-                            .textFieldStyle(.plain)
-                            .padding(16)
-                            .focused($nameFieldFocused)
-                            .onChange(of: name) { _, newValue in
-                                if showNameError && !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
-                                    showNameError = false
+                        VStack(alignment: .leading, spacing: 4) {
+                            TextField("Enter food name", text: $name)
+                                .textFieldStyle(.plain)
+                                .padding(16)
+                                .focused($nameFieldFocused)
+                                .onChange(of: name) { _, newValue in
+                                    if showNameError && !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
+                                        showNameError = false
+                                    }
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                        showAutoComplete = !newValue.isEmpty && !filteredEntries.isEmpty
+                                    }
                                 }
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                                    showAutoComplete = !newValue.isEmpty && !filteredEntries.isEmpty
-                                }
+                                .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(showNameError ? Color.error : Color.clear, lineWidth: 2)
+                                )
+
+                            if showNameError {
+                                Text("required")
+                                    .font(.caption)
+                                    .foregroundStyle(Color.error)
+                                    .padding(.leading, 4)
                             }
-                            .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(showNameError ? Color.error : Color.clear, lineWidth: 2)
-                            )
-
-                        if showNameError {
-                            Text("required")
-                                .font(.caption)
-                                .foregroundStyle(Color.error)
-                                .padding(.leading, 4)
                         }
-                    }
                         .overlay(alignment: .top) {
                             if showAutoComplete && nameFieldFocused {
                                 VStack(spacing: 0) {
@@ -177,104 +180,109 @@ struct AddEntryView: View {
                         }
                         .zIndex(100)
 
-                }
-                .zIndex(100)
+                    }
+                    .zIndex(100)
 
-                // Nutrition (Calories + Macros)
-                VStack(alignment: .leading, spacing: 8) {
-                    sectionHeader("Nutrition", required: false)
+                    // Nutrition (Calories + Macros)
+                    VStack(alignment: .leading, spacing: 8) {
+                        sectionHeader("Nutrition", required: false)
 
-                    VStack(spacing: 0) {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Calories")
-                                    .foregroundStyle(showCaloriesError ? Color.error : .primary)
-                                if showCaloriesError {
-                                    Text("required")
-                                        .font(.caption)
-                                        .foregroundStyle(Color.error)
-                                }
-                            }
-                            Spacer()
-                            TextField("0", text: $caloriesText)
-                                .keyboardType(.numberPad)
-                                .multilineTextAlignment(.trailing)
-                                .frame(width: 60)
-                                .onChange(of: caloriesText) { _, newValue in
-                                    if showCaloriesError && (Int(newValue) ?? 0) > 0 {
-                                        showCaloriesError = false
+                        VStack(spacing: 0) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Calories")
+                                        .foregroundStyle(showCaloriesError ? Color.error : .primary)
+                                    if showCaloriesError {
+                                        Text("required")
+                                            .font(.caption)
+                                            .foregroundStyle(Color.error)
                                     }
                                 }
-                            Text("kcal")
-                                .foregroundStyle(.secondary)
+                                Spacer()
+                                TextField("0", text: $caloriesText)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .frame(width: 60)
+                                    .onChange(of: caloriesText) { _, newValue in
+                                        if showCaloriesError && (Int(newValue) ?? 0) > 0 {
+                                            showCaloriesError = false
+                                        }
+                                    }
+                                Text("kcal")
+                                    .foregroundStyle(.secondary)
+                            }
+                            .padding(16)
+                            .background(
+                                showCaloriesError
+                                    ? Color.error.opacity(0.1)
+                                    : Color.clear,
+                                in: UnevenRoundedRectangle(
+                                    topLeadingRadius: 10,
+                                    bottomLeadingRadius: 0,
+                                    bottomTrailingRadius: 0,
+                                    topTrailingRadius: 10
+                                )
+                            )
+
+                            Divider().padding(.leading, 16)
+                            macroRow(label: "Protein", text: $proteinText)
+                            Divider().padding(.leading, 16)
+                            macroRow(label: "Fat", text: $fatText)
+                            Divider().padding(.leading, 16)
+                            macroRow(label: "Carbs", text: $carbsText)
+                        }
+                        .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(showCaloriesError ? Color.error : Color.clear, lineWidth: 2)
+                        )
+                    }
+
+                    // Servings
+                    VStack(alignment: .leading, spacing: 8) {
+                        sectionHeader("Servings", required: false)
+
+                        HStack {
+                            Text("\(servings, specifier: "%.1f")")
+                                .font(.body.monospacedDigit())
+                            Spacer()
+                            Stepper("", value: $servings, in: 0.5 ... 20, step: 0.5)
+                                .labelsHidden()
                         }
                         .padding(16)
-                        .background(
-                            showCaloriesError
-                                ? Color.error.opacity(0.1)
-                                : Color.clear,
-                            in: UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 10)
-                        )
-
-                        Divider().padding(.leading, 16)
-                        macroRow(label: "Protein", text: $proteinText)
-                        Divider().padding(.leading, 16)
-                        macroRow(label: "Fat", text: $fatText)
-                        Divider().padding(.leading, 16)
-                        macroRow(label: "Carbs", text: $carbsText)
+                        .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                     }
-                    .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(showCaloriesError ? Color.error : Color.clear, lineWidth: 2)
-                    )
-                }
 
-                // Servings
-                VStack(alignment: .leading, spacing: 8) {
-                    sectionHeader("Servings", required: false)
-
-                    HStack {
-                        Text("\(servings, specifier: "%.1f")")
-                            .font(.body.monospacedDigit())
-                        Spacer()
-                        Stepper("", value: $servings, in: 0.5...20, step: 0.5)
-                            .labelsHidden()
-                    }
-                    .padding(16)
-                    .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
-                }
-
-                if isEditing {
-                    Button(role: .destructive) {
-                        deleteEntry()
-                    } label: {
-                        HStack {
-                            Image(systemName: "trash")
-                            Text("Delete Entry")
+                    if isEditing {
+                        Button(role: .destructive) {
+                            deleteEntry()
+                        } label: {
+                            HStack {
+                                Image(systemName: "trash")
+                                Text("Delete Entry")
+                            }
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(Color.destructive)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color.destructive.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
                         }
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(Color.destructive)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(Color.destructive.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
+                        .padding(.top, 8)
                     }
-                    .padding(.top, 8)
                 }
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 60)
-            .padding(.bottom, 80)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                if showAutoComplete || nameFieldFocused {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                        showAutoComplete = false
-                        nameFieldFocused = false
+                .padding(.horizontal, 16)
+                .padding(.top, 60)
+                .padding(.bottom, 80)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    if showAutoComplete || nameFieldFocused {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                            showAutoComplete = false
+                            nameFieldFocused = false
+                        }
                     }
                 }
             }
-        }
             // Floating header overlay
             ZStack {
                 if showHeaderTitle {
@@ -414,5 +422,3 @@ struct AddEntryView: View {
         dismiss()
     }
 }
-
-

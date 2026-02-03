@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 import UIKit
 
 struct FoodRecognitionResultsView: View {
@@ -39,7 +39,7 @@ struct FoodRecognitionResultsView: View {
                     }
                 } else {
                     List {
-                        Section { } header: {
+                        Section {} header: {
                             Spacer()
                         }
 
@@ -49,8 +49,8 @@ struct FoodRecognitionResultsView: View {
                                     .contentShape(Rectangle())
                                     .listRowBackground(
                                         selectedIDs.contains(candidate.id)
-                                        ? Color.theme.opacity(0.1)
-                                        : Color.secondarySurfaceBackground
+                                            ? Color.theme.opacity(0.1)
+                                            : Color.secondarySurfaceBackground
                                     )
                                     .onTapGesture {
                                         withAnimation(.easeInOut(duration: 0.15)) {
@@ -78,7 +78,11 @@ struct FoodRecognitionResultsView: View {
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 12)
                                     .background(selectedIDs.isEmpty ? Color.subtle : Color.theme, in: Capsule())
-                                    .shadow(color: selectedIDs.isEmpty ? Color.clear : Color.theme.opacity(0.4), radius: 8, y: 4)
+                                    .shadow(
+                                        color: selectedIDs.isEmpty ? Color.clear : Color.theme.opacity(0.4),
+                                        radius: 8,
+                                        y: 4
+                                    )
                             }
                             .buttonStyle(.plain)
                             .disabled(selectedIDs.isEmpty)
@@ -142,9 +146,21 @@ struct FoodRecognitionResultsView: View {
 
                 FlowLayout(spacing: 6) {
                     nutrientPill(value: "\(candidate.calories)", label: "calories", color: Color.theme)
-                    nutrientPill(value: "\(String(format: "%.0f", candidate.proteinGrams))g", label: "protein", color: .proteinColor)
-                    nutrientPill(value: "\(String(format: "%.0f", candidate.fatGrams))g", label: "fat", color: .fatColor)
-                    nutrientPill(value: "\(String(format: "%.0f", candidate.carbsGrams))g", label: "carbs", color: .carbsColor)
+                    nutrientPill(
+                        value: "\(String(format: "%.0f", candidate.proteinGrams))g",
+                        label: "protein",
+                        color: .proteinColor
+                    )
+                    nutrientPill(
+                        value: "\(String(format: "%.0f", candidate.fatGrams))g",
+                        label: "fat",
+                        color: .fatColor
+                    )
+                    nutrientPill(
+                        value: "\(String(format: "%.0f", candidate.carbsGrams))g",
+                        label: "carbs",
+                        color: .carbsColor
+                    )
                 }
             }
             .padding(.vertical, 4)
@@ -186,7 +202,7 @@ struct FoodRecognitionResultsView: View {
         let service = PhotoRecognitionService(apiClient: LiveAPIClient())
         do {
             let response = try await service.recognize(image: image)
-            if response.recognized && !response.candidates.isEmpty {
+            if response.recognized, !response.candidates.isEmpty {
                 candidates = response.candidates
             }
         } catch {

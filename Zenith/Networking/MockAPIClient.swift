@@ -27,7 +27,7 @@ struct MockAPIClient: APIClient {
                     fatGrams: 10.9,
                     carbsGrams: 0.0,
                     servingDescription: "1 thigh (130g)"
-                )
+                ),
             ],
             errorMessage: nil
         )

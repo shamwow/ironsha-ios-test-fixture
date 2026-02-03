@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -43,16 +43,20 @@ struct SettingsView: View {
                 Section("Nutrition Goals") {
                     if let s = userSettings {
                         GoalRow(label: "Calories", value: "\(s.dailyCalorieGoal)", unit: "kcal") {
-                            editingGoal = .calories; editText = "\(s.dailyCalorieGoal)"
+                            editingGoal = .calories
+                            editText = "\(s.dailyCalorieGoal)"
                         }
                         GoalRow(label: "Protein", value: "\(Int(s.dailyProteinGoal))", unit: "g") {
-                            editingGoal = .protein; editText = "\(Int(s.dailyProteinGoal))"
+                            editingGoal = .protein
+                            editText = "\(Int(s.dailyProteinGoal))"
                         }
                         GoalRow(label: "Fat", value: "\(Int(s.dailyFatGoal))", unit: "g") {
-                            editingGoal = .fat; editText = "\(Int(s.dailyFatGoal))"
+                            editingGoal = .fat
+                            editText = "\(Int(s.dailyFatGoal))"
                         }
                         GoalRow(label: "Carbs", value: "\(Int(s.dailyCarbsGoal))", unit: "g") {
-                            editingGoal = .carbs; editText = "\(Int(s.dailyCarbsGoal))"
+                            editingGoal = .carbs
+                            editText = "\(Int(s.dailyCarbsGoal))"
                         }
                     }
                 }
@@ -102,7 +106,8 @@ struct SettingsView: View {
                     .keyboardType(.numberPad)
                 Button("Save") {
                     if let s = userSettings, let goal = editingGoal,
-                       let val = Double(editText), val > 0 {
+                       let val = Double(editText), val > 0
+                    {
                         switch goal {
                         case .calories: s.dailyCalorieGoal = Int(val)
                         case .protein: s.dailyProteinGoal = val
@@ -120,42 +125,42 @@ struct SettingsView: View {
             }
 
             // Floating header overlay
-        
-                ZStack {
-                    if showHeaderTitle {
-                        Text("Settings")
-                            .font(.headline)
-                            .foregroundStyle(Color.theme)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
 
-                    HStack {
-                        Spacer()
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 28))
-                                .symbolRenderingMode(.hierarchical)
-                                .foregroundStyle(.secondary)
-                        }
+            ZStack {
+                if showHeaderTitle {
+                    Text("Settings")
+                        .font(.headline)
+                        .foregroundStyle(Color.theme)
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
+                }
+
+                HStack {
+                    Spacer()
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 28))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .animation(.easeInOut(duration: 0.2), value: showHeaderTitle)
-                .padding(.horizontal, 16)
-                .padding(.top, 14)
-                .padding(.bottom, 20)
-                .background(
-                    LinearGradient(
-                        stops: [
-                            .init(color: Color.surfaceBackground, location: 0),
-                            .init(color: Color.surfaceBackground, location: 0.6),
-                            .init(color: Color.surfaceBackground.opacity(0), location: 1.0),
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
+            }
+            .animation(.easeInOut(duration: 0.2), value: showHeaderTitle)
+            .padding(.horizontal, 16)
+            .padding(.top, 14)
+            .padding(.bottom, 20)
+            .background(
+                LinearGradient(
+                    stops: [
+                        .init(color: Color.surfaceBackground, location: 0),
+                        .init(color: Color.surfaceBackground, location: 0.6),
+                        .init(color: Color.surfaceBackground.opacity(0), location: 1.0),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
                 )
+            )
         }
     }
 
