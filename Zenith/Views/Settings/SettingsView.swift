@@ -38,7 +38,7 @@ struct SettingsView: View {
                                     }
                             }
                         )
-                }
+                }.padding(.top, 60)
 
                 Section("Nutrition Goals") {
                     if let s = userSettings {
@@ -90,9 +90,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .safeAreaInset(edge: .top) {
-                Color.clear.frame(height: 28)
-            }
+            .contentMargins(.top, 0)
             .alert(
                 editingGoal?.label ?? "",
                 isPresented: Binding(
@@ -122,7 +120,7 @@ struct SettingsView: View {
             }
 
             // Floating header overlay
-            VStack(spacing: 0) {
+        
                 ZStack {
                     if showHeaderTitle {
                         Text("Settings")
@@ -158,9 +156,6 @@ struct SettingsView: View {
                         endPoint: .bottom
                     )
                 )
-
-                Spacer()
-            }
         }
     }
 
