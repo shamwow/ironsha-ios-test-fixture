@@ -1,7 +1,7 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
-// Original name kept as typealias for compatibility
+/// Original name kept as typealias for compatibility
 typealias RecentEntriesListView = RecentEntriesCardView
 
 struct RecentEntriesCardView: View {
@@ -30,21 +30,36 @@ struct RecentEntriesCardView: View {
             .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
         } else {
             VStack(spacing: 0) {
+
                 ForEach(Array(sortedEntries.enumerated()), id: \.element.id) { index, entry in
                     VStack(alignment: .leading, spacing: 8) {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(entry.name)
                                 .font(.headline)
-                            Text("\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            Text(
+                                "\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())"
+                            )
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                         }
 
                         FlowLayout(spacing: 6) {
                             nutrientPill(value: "\(entry.totalCalories)", label: "calories", color: Color.theme)
-                            nutrientPill(value: "\(String(format: "%.0f", entry.totalProtein))g", label: "protein", color: .proteinColor)
-                            nutrientPill(value: "\(String(format: "%.0f", entry.totalFat))g", label: "fat", color: .fatColor)
-                            nutrientPill(value: "\(String(format: "%.0f", entry.totalCarbs))g", label: "carbs", color: .carbsColor)
+                            nutrientPill(
+                                value: "\(String(format: "%.0f", entry.totalProtein))g",
+                                label: "protein",
+                                color: .proteinColor
+                            )
+                            nutrientPill(
+                                value: "\(String(format: "%.0f", entry.totalFat))g",
+                                label: "fat",
+                                color: .fatColor
+                            )
+                            nutrientPill(
+                                value: "\(String(format: "%.0f", entry.totalCarbs))g",
+                                label: "carbs",
+                                color: .carbsColor
+                            )
                         }
                     }
                     .padding(.horizontal, 16)
@@ -74,6 +89,7 @@ struct RecentEntriesCardView: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
         }
     }

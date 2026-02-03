@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
@@ -132,13 +132,13 @@ struct DashboardView: View {
                                     }
                             }
                         )
-                    
+
                     VStack(spacing: 8) {
                         Text("Macros")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        
+
                         MacroSummaryView(
                             protein: totalProtein,
                             fat: totalFat,
@@ -151,7 +151,7 @@ struct DashboardView: View {
                     .padding(16)
                     .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
                     .padding(.horizontal, 16)
-                    
+
                     RecentEntriesCardView(entries: selectedEntries, onDelete: { entry in
                         modelContext.delete(entry)
                         try? modelContext.save()
@@ -164,7 +164,7 @@ struct DashboardView: View {
                 .padding(.bottom, 100)
             }
             .offset(x: slideOffset)
-            
+
             // Fixed header overlay
             HStack {
                 ZStack(alignment: .leading) {
@@ -176,7 +176,7 @@ struct DashboardView: View {
                                 removal: .scale(scale: 0, anchor: .bottom).combined(with: .opacity)
                             ))
                     }
-                    
+
                     if showCalorieInHeader {
                         HStack(alignment: .firstTextBaseline, spacing: 2) {
                             Text("\(totalCalories)")
@@ -192,9 +192,9 @@ struct DashboardView: View {
                     }
                 }
                 .animation(.spring(response: 0.35, dampingFraction: 0.8), value: showCalorieInHeader)
-                
+
                 Spacer()
-                
+
                 HStack(spacing: 8) {
                     Button {
                         goBack()
@@ -203,7 +203,7 @@ struct DashboardView: View {
                             .font(.system(size: 14, weight: .semibold))
                     }
                     .disabled(isAnimating)
-                    
+
                     Button {
                         pickerDate = selectedDate
                         showDatePicker = true
@@ -213,12 +213,12 @@ struct DashboardView: View {
                             .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
-                    
+
                     Text(selectedDate.dayAndMonth)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize()
-                    
+
                     Button {
                         goForward()
                     } label: {
@@ -281,5 +281,3 @@ struct DashboardView: View {
         }
     }
 }
-
-

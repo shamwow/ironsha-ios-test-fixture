@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct HistoryView: View {
     @Query(sort: \FoodEntry.loggedAt, order: .reverse) private var allEntries: [FoodEntry]
@@ -44,12 +44,18 @@ struct HistoryView: View {
 
                             ZStack {
                                 Circle()
-                                    .stroke(isOver ? Color.ringOver.opacity(0.2) : Color.ringUnder.opacity(0.2), lineWidth: 4)
+                                    .stroke(
+                                        isOver ? Color.ringOver.opacity(0.2) : Color.ringUnder.opacity(0.2),
+                                        lineWidth: 4
+                                    )
                                     .frame(width: 30, height: 30)
 
                                 Circle()
                                     .trim(from: 0, to: progress)
-                                    .stroke(isOver ? Color.ringOver : Color.ringUnder, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                                    .stroke(
+                                        isOver ? Color.ringOver : Color.ringUnder,
+                                        style: StrokeStyle(lineWidth: 4, lineCap: .round)
+                                    )
                                     .frame(width: 30, height: 30)
                                     .rotationEffect(.degrees(-90))
                             }

@@ -8,6 +8,7 @@ struct LiveAPIClient: APIClient {
         e.dateEncodingStrategy = .iso8601
         return e
     }()
+
     private let decoder: JSONDecoder = {
         let d = JSONDecoder()
         d.dateDecodingStrategy = .iso8601
