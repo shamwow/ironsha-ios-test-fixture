@@ -19,15 +19,15 @@ struct CalorieRingView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Eaten")
                         .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(Color.cardBackground.opacity(0.7))
 
                     HStack(alignment: .firstTextBaseline, spacing: 2) {
                         Text("\(consumed)")
                             .font(.system(size: 28, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.cardBackground)
                         Text("kcal")
                             .font(.caption.weight(.semibold))
-                            .foregroundStyle(.white.opacity(0.7))
+                            .foregroundStyle(Color.cardBackground.opacity(0.7))
                     }
                 }
 
@@ -50,7 +50,7 @@ struct CalorieRingView: View {
                         .fill(Color.themeDark)
 
                     Capsule()
-                        .fill(.white)
+                        .fill(Color.cardBackground)
                         .frame(width: max(0, geo.size.width * progress))
                         .animation(.easeInOut(duration: 0.6), value: progress)
                 }

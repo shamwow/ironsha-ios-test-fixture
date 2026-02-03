@@ -43,7 +43,7 @@ struct PhotoCaptureView: View {
                     .buttonStyle(.borderedProminent)
                 } else if let error = errorMessage {
                     Text(error)
-                        .foregroundStyle(.red)
+                        .foregroundStyle(Color.destructive)
                 }
 
                 Button("Retake Photo") {

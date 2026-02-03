@@ -71,7 +71,7 @@ struct ContentView: View {
                         .font(.system(size: 20, weight: .medium))
                         .frame(width: 48, height: 48)
                 }
-                .tint(.white)
+                .tint(Color.cardBackground)
 
                 Spacer()
                     .frame(width: 120)
@@ -83,7 +83,7 @@ struct ContentView: View {
                         .font(.system(size: 20, weight: .medium))
                         .frame(width: 48, height: 48)
                 }
-                .tint(.white)
+                .tint(Color.cardBackground)
             }
             .padding(.horizontal, 44)
             .padding(.vertical, 8)
@@ -119,9 +119,9 @@ private struct AddButton: View {
     var body: some View {
         Image(systemName: "plus")
             .font(.system(size: 26, weight: .bold))
-            .foregroundStyle(isPressed ? .white : Color.theme)
+            .foregroundStyle(isPressed ? Color.cardBackground : Color.theme)
             .frame(width: 55, height: 55)
-            .background(isPressed ? Color.themeDark : .white, in: Circle())
+            .background(isPressed ? Color.themeDark : Color.cardBackground, in: Circle())
             .frame(width: 80, height: 80)
             .background(isPressed ? Color.themeDark : Color.theme, in: Circle())
             .animation(.easeInOut(duration: 0.15), value: isPressed)
