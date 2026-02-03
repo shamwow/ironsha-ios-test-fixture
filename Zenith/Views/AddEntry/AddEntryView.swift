@@ -91,7 +91,7 @@ struct AddEntryView: View {
                         .font(.system(size: 34, weight: .bold))
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
-                        .padding(.leading, 16)
+                        .padding(.horizontal, 16)
                         .overlay(
                             GeometryReader { geo in
                                 Color.clear
@@ -114,7 +114,7 @@ struct AddEntryView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         TextField("Enter food name", text: $name)
                             .textFieldStyle(.plain)
-                            .padding(12)
+                            .padding(16)
                             .focused($nameFieldFocused)
                             .onChange(of: name) { _, newValue in
                                 if showNameError && !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -157,7 +157,7 @@ struct AddEntryView: View {
                                                     .font(.caption)
                                                     .foregroundStyle(.secondary)
                                             }
-                                            .padding(.horizontal, 12)
+                                            .padding(.horizontal, 16)
                                             .padding(.vertical, 10)
                                             .contentShape(Rectangle())
                                         }
@@ -165,7 +165,7 @@ struct AddEntryView: View {
 
                                         if entry.id != filteredEntries.prefix(5).last?.id {
                                             Divider()
-                                                .padding(.horizontal, 12)
+                                                .padding(.horizontal, 16)
                                         }
                                     }
                                 }
@@ -208,7 +208,7 @@ struct AddEntryView: View {
                             Text("kcal")
                                 .foregroundStyle(.secondary)
                         }
-                        .padding(12)
+                        .padding(16)
                         .background(
                             showCaloriesError
                                 ? Color.error.opacity(0.1)
@@ -216,11 +216,11 @@ struct AddEntryView: View {
                             in: UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 10)
                         )
 
-                        Divider().padding(.leading, 12)
+                        Divider().padding(.leading, 16)
                         macroRow(label: "Protein", text: $proteinText)
-                        Divider().padding(.leading, 12)
+                        Divider().padding(.leading, 16)
                         macroRow(label: "Fat", text: $fatText)
-                        Divider().padding(.leading, 12)
+                        Divider().padding(.leading, 16)
                         macroRow(label: "Carbs", text: $carbsText)
                     }
                     .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
@@ -241,7 +241,7 @@ struct AddEntryView: View {
                         Stepper("", value: $servings, in: 0.5...20, step: 0.5)
                             .labelsHidden()
                     }
-                    .padding(12)
+                    .padding(16)
                     .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                 }
 
@@ -262,8 +262,8 @@ struct AddEntryView: View {
                     .padding(.top, 8)
                 }
             }
-            .padding(16)
-            .padding(.top, 44)
+            .padding(.horizontal, 16)
+            .padding(.top, 60)
             .padding(.bottom, 80)
             .contentShape(Rectangle())
             .onTapGesture {
@@ -370,7 +370,7 @@ struct AddEntryView: View {
             Text(unit)
                 .foregroundStyle(.secondary)
         }
-        .padding(12)
+        .padding(16)
     }
 
     private func selectFromEntry(_ entry: FoodEntry) {
