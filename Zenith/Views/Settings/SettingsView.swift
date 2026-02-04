@@ -19,7 +19,7 @@ struct SettingsView: View {
             Form {
                 Section {
                     Text("Settings")
-                        .font(.pageTitle)
+                        .font(.titleBold)
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
                         .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))

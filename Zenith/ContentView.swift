@@ -87,6 +87,7 @@ struct ContentView: View {
                         .background(.ultraThinMaterial, in: Capsule())
                 }
             }
+            .padding(.leading, .paddingMedium)
 
             Spacer()
 
@@ -94,8 +95,8 @@ struct ContentView: View {
                 capturedImage = nil
                 showCamera = true
             }
+            .padding(.trailing, .paddingMedium)
         }
-        .padding(.horizontal, .paddingMedium)
         .padding(.bottom, .paddingXs)
     }
 

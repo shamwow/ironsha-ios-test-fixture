@@ -62,6 +62,7 @@ struct RecentEntriesCardView: View {
                             )
                         }
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, .paddingMedium)
                     .padding(.vertical, 10)
                     .contentShape(Rectangle())
