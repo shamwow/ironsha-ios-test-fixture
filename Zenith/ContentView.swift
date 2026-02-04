@@ -62,13 +62,13 @@ struct ContentView: View {
 
     private var bottomBar: some View {
         HStack {
-            HStack(spacing: 16) {
+            HStack(spacing: .spacingLarge) {
                 Button {
                     // Social — placeholder
                 } label: {
                     Image(systemName: "person.2")
                         .font(.iconToolbar)
-                        .frame(width: 60, height: 60)
+                        .frame(width: .buttonSize, height: .buttonSize)
                 }
 
                 Button {
@@ -76,7 +76,7 @@ struct ContentView: View {
                 } label: {
                     Image(systemName: "gearshape")
                         .font(.iconToolbar)
-                        .frame(width: 60, height: 60)
+                        .frame(width: .buttonSize, height: .buttonSize)
                 }
             }
             .modify { view in
@@ -87,16 +87,16 @@ struct ContentView: View {
                         .background(.ultraThinMaterial, in: Capsule())
                 }
             }
-            
+
             Spacer()
-            
+
             AddButton {
                 capturedImage = nil
                 showCamera = true
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.bottom, 8)
+        .padding(.horizontal, .paddingMedium)
+        .padding(.bottom, .paddingXs)
     }
 
     private func bootstrapSettings() {
@@ -120,7 +120,7 @@ private struct AddButton: View {
             Image(systemName: "plus")
                 .font(.iconToolbar)
                 .foregroundStyle(Color.white)
-                .frame(width: 60, height: 60)
+                .frame(width: .buttonSize, height: .buttonSize)
         }
         .modify { view in
             if #available(iOS 26.0, *) {

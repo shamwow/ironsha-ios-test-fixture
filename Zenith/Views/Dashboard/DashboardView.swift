@@ -115,9 +115,9 @@ struct DashboardView: View {
         ZStack(alignment: .top) {
             // Scrollable content
             ScrollView {
-                VStack(spacing: 16) {
+                VStack(spacing: .spacingLarge) {
                     CalorieRingView(consumed: totalCalories, goal: calorieGoal)
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, .paddingMedium)
                         .overlay(
                             GeometryReader { geo in
                                 Color.clear
@@ -133,7 +133,7 @@ struct DashboardView: View {
                             }
                         )
 
-                    VStack(spacing: 8) {
+                    VStack(spacing: .spacingSmall) {
                         Text("Macros")
                             .font(.subheadlineSemibold)
                             .foregroundStyle(.secondary)
@@ -148,9 +148,9 @@ struct DashboardView: View {
                             carbsGoal: settings.first?.dailyCarbsGoal ?? 250
                         )
                     }
-                    .padding(16)
+                    .padding(.paddingMedium)
                     .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, .paddingMedium)
 
                     RecentEntriesCardView(entries: selectedEntries, onDelete: { entry in
                         modelContext.delete(entry)
@@ -158,7 +158,7 @@ struct DashboardView: View {
                     }, onEdit: { entry in
                         editingEntry = entry
                     })
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, .paddingMedium)
                 }
                 .padding(.top, 74)
                 .padding(.bottom, 100)
@@ -178,7 +178,7 @@ struct DashboardView: View {
                     }
 
                     if showCalorieInHeader {
-                        HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        HStack(alignment: .firstTextBaseline, spacing: .spacingXxs) {
                             Text("\(totalCalories)")
                                 .font(.pageTitle)
                             Text("/ \(calorieGoal) kcal")
@@ -195,7 +195,7 @@ struct DashboardView: View {
 
                 Spacer()
 
-                HStack(spacing: 8) {
+                HStack(spacing: .spacingSmall) {
                     Button {
                         goBack()
                     } label: {
@@ -228,7 +228,7 @@ struct DashboardView: View {
                     .disabled(isToday || isAnimating)
                 }
             }
-            .padding(.horizontal, 32)
+            .padding(.horizontal, .paddingXlarge)
             .padding(.vertical, 10)
             .offset(x: slideOffset)
             .background(.ultraThinMaterial)

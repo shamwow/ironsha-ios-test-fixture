@@ -17,7 +17,7 @@ struct NutritionFormFields: View {
                 TextField("kcal", value: $calories, format: .number)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
-                    .frame(width: 100)
+                    .frame(width: .inputFieldMedium)
             }
         }
 
@@ -35,7 +35,7 @@ struct NutritionFormFields: View {
             TextField("0", value: value, format: .number)
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.trailing)
-                .frame(width: 100)
+                .frame(width: .inputFieldMedium)
         }
     }
 }

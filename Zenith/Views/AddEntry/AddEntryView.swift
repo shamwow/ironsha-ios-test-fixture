@@ -88,13 +88,13 @@ struct AddEntryView: View {
     var body: some View {
         ZStack(alignment: .top) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: .spacingXlarge) {
                     // Large title in content
                     Text(isEditing ? "Edit Entry" : "Add Entry")
                         .font(.pageTitle)
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
-                        .padding(.horizontal, 16)
+                        .padding(.horizontal, .paddingMedium)
                         .overlay(
                             GeometryReader { geo in
                                 Color.clear
@@ -111,13 +111,13 @@ struct AddEntryView: View {
                         )
 
                     // Name field
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: .spacingSmall) {
                         sectionHeader("Name", required: false)
 
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading, spacing: .spacingXs) {
                             TextField("Enter food name", text: $name)
                                 .textFieldStyle(.plain)
-                                .padding(16)
+                                .padding(.paddingMedium)
                                 .focused($nameFieldFocused)
                                 .onChange(of: name) { _, newValue in
                                     if showNameError && !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -137,7 +137,7 @@ struct AddEntryView: View {
                                 Text("required")
                                     .font(.caption)
                                     .foregroundStyle(Color.error)
-                                    .padding(.leading, 4)
+                                    .padding(.leading, .paddingXxs)
                             }
                         }
                         .overlay(alignment: .top) {
@@ -148,7 +148,7 @@ struct AddEntryView: View {
                                             selectFromEntry(entry)
                                         } label: {
                                             HStack {
-                                                VStack(alignment: .leading, spacing: 2) {
+                                                VStack(alignment: .leading, spacing: .spacingXxs) {
                                                     Text(entry.name)
                                                         .foregroundStyle(.primary)
                                                     Text("\(entry.calories) kcal")
@@ -160,7 +160,7 @@ struct AddEntryView: View {
                                                     .font(.caption)
                                                     .foregroundStyle(.secondary)
                                             }
-                                            .padding(.horizontal, 16)
+                                            .padding(.horizontal, .paddingMedium)
                                             .padding(.vertical, 10)
                                             .contentShape(Rectangle())
                                         }
@@ -168,13 +168,13 @@ struct AddEntryView: View {
 
                                         if entry.id != filteredEntries.prefix(5).last?.id {
                                             Divider()
-                                                .padding(.horizontal, 16)
+                                                .padding(.horizontal, .paddingMedium)
                                         }
                                     }
                                 }
                                 .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                                 .shadow(color: .black.opacity(0.15), radius: 12, y: 4)
-                                .offset(y: 52)
+                                .offset(y: .autocompleteOffset)
                                 .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
                             }
                         }
@@ -184,12 +184,12 @@ struct AddEntryView: View {
                     .zIndex(100)
 
                     // Nutrition (Calories + Macros)
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: .spacingSmall) {
                         sectionHeader("Nutrition", required: false)
 
-                        VStack(spacing: 0) {
+                        VStack(spacing: .spacingNone) {
                             HStack {
-                                VStack(alignment: .leading, spacing: 2) {
+                                VStack(alignment: .leading, spacing: .spacingXxs) {
                                     Text("Calories")
                                         .foregroundStyle(showCaloriesError ? Color.error : .primary)
                                     if showCaloriesError {
@@ -202,7 +202,7 @@ struct AddEntryView: View {
                                 TextField("0", text: $caloriesText)
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
-                                    .frame(width: 60)
+                                    .frame(width: .inputFieldSmall)
                                     .onChange(of: caloriesText) { _, newValue in
                                         if showCaloriesError && (Int(newValue) ?? 0) > 0 {
                                             showCaloriesError = false
@@ -211,7 +211,7 @@ struct AddEntryView: View {
                                 Text("kcal")
                                     .foregroundStyle(.secondary)
                             }
-                            .padding(16)
+                            .padding(.paddingMedium)
                             .background(
                                 showCaloriesError
                                     ? Color.error.opacity(0.1)
@@ -224,11 +224,11 @@ struct AddEntryView: View {
                                 )
                             )
 
-                            Divider().padding(.leading, 16)
+                            Divider().padding(.leading, .paddingMedium)
                             macroRow(label: "Protein", text: $proteinText)
-                            Divider().padding(.leading, 16)
+                            Divider().padding(.leading, .paddingMedium)
                             macroRow(label: "Fat", text: $fatText)
-                            Divider().padding(.leading, 16)
+                            Divider().padding(.leading, .paddingMedium)
                             macroRow(label: "Carbs", text: $carbsText)
                         }
                         .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
@@ -239,7 +239,7 @@ struct AddEntryView: View {
                     }
 
                     // Servings
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: .spacingSmall) {
                         sectionHeader("Servings", required: false)
 
                         HStack {
@@ -249,7 +249,7 @@ struct AddEntryView: View {
                             Stepper("", value: $servings, in: 0.5 ... 20, step: 0.5)
                                 .labelsHidden()
                         }
-                        .padding(16)
+                        .padding(.paddingMedium)
                         .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 10))
                     }
 
@@ -267,12 +267,12 @@ struct AddEntryView: View {
                             .padding(.vertical, 14)
                             .background(Color.destructive.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
                         }
-                        .padding(.top, 8)
+                        .padding(.top, .paddingXs)
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 60)
-                .padding(.bottom, 80)
+                .padding(.horizontal, .paddingMedium)
+                .padding(.top, .paddingXxlarge)
+                .padding(.bottom, .paddingXxxlarge)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if showAutoComplete || nameFieldFocused {
@@ -305,9 +305,9 @@ struct AddEntryView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.2), value: showHeaderTitle)
-            .padding(.horizontal, 16)
+            .padding(.horizontal, .paddingMedium)
             .padding(.top, 14)
-            .padding(.bottom, 20)
+            .padding(.bottom, .paddingLarge)
             .background(
                 LinearGradient(
                     stops: [
@@ -322,7 +322,7 @@ struct AddEntryView: View {
         }
         .background(Color.surfaceBackground)
         .safeAreaInset(edge: .bottom) {
-            HStack(spacing: 12) {
+            HStack(spacing: .spacingMedium) {
                 // Log Entry button
                 Button {
                     if isValid {
@@ -348,13 +348,13 @@ struct AddEntryView: View {
                 }
 
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, .paddingMedium)
+            .padding(.vertical, .paddingSmall)
         }
     }
 
     private func sectionHeader(_ title: String, required: Bool) -> some View {
-        HStack(spacing: 4) {
+        HStack(spacing: .spacingXs) {
             Text(title)
                 .font(.subheadlineSemibold)
                 .foregroundStyle(.secondary)
@@ -364,7 +364,7 @@ struct AddEntryView: View {
                     .foregroundStyle(.secondary.opacity(0.7))
             }
         }
-        .padding(.leading, 16)
+        .padding(.leading, .paddingMedium)
     }
 
     private func macroRow(label: String, text: Binding<String>, unit: String = "g") -> some View {
@@ -374,11 +374,11 @@ struct AddEntryView: View {
             TextField("0", text: text)
                 .keyboardType(unit == "kcal" ? .numberPad : .decimalPad)
                 .multilineTextAlignment(.trailing)
-                .frame(width: 60)
+                .frame(width: .inputFieldSmall)
             Text(unit)
                 .foregroundStyle(.secondary)
         }
-        .padding(16)
+        .padding(.paddingMedium)
     }
 
     private func selectFromEntry(_ entry: FoodEntry) {

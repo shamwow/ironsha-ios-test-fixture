@@ -14,14 +14,14 @@ struct CalorieRingView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: .spacingLarge) {
             HStack {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: .spacingXs) {
                     Text("Eaten")
                         .font(.subheadlineMedium)
                         .foregroundStyle(Color.cardBackground.opacity(0.7))
 
-                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                    HStack(alignment: .firstTextBaseline, spacing: .spacingXxs) {
                         Text("\(consumed)")
                             .font(.calorieDisplay)
                             .foregroundStyle(Color.cardBackground)
@@ -33,7 +33,7 @@ struct CalorieRingView: View {
 
                 Spacer()
 
-                VStack(alignment: .trailing, spacing: 4) {
+                VStack(alignment: .trailing, spacing: .spacingXs) {
                     Text("Remaining")
                         .font(.subheadlineMedium)
                         .foregroundStyle(Color.themeDark)
@@ -55,9 +55,9 @@ struct CalorieRingView: View {
                         .animation(.easeInOut(duration: 0.6), value: progress)
                 }
             }
-            .frame(height: 14)
+            .frame(height: .progressBarHeight)
         }
-        .padding(20)
+        .padding(.paddingLarge)
         .background(Color.theme, in: RoundedRectangle(cornerRadius: 16))
     }
 }

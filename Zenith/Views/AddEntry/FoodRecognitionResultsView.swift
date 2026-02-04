@@ -18,7 +18,7 @@ struct FoodRecognitionResultsView: View {
         ZStack(alignment: .topTrailing) {
             Group {
                 if isLoading {
-                    VStack(spacing: 16) {
+                    VStack(spacing: .spacingLarge) {
                         ProgressView()
                             .controlSize(.large)
                         Text("Recognizing food...")
@@ -68,7 +68,7 @@ struct FoodRecognitionResultsView: View {
 
                     }
                     .safeAreaInset(edge: .bottom) {
-                        VStack(spacing: 12) {
+                        VStack(spacing: .spacingMedium) {
                             Button {
                                 logSelected()
                             } label: {
@@ -76,7 +76,7 @@ struct FoodRecognitionResultsView: View {
                                     .font(.headline)
                                     .foregroundStyle(Color.cardBackground)
                                     .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 12)
+                                    .padding(.vertical, .paddingSmall)
                                     .background(selectedIDs.isEmpty ? Color.subtle : Color.theme, in: Capsule())
                                     .shadow(
                                         color: selectedIDs.isEmpty ? Color.clear : Color.theme.opacity(0.4),
@@ -97,7 +97,7 @@ struct FoodRecognitionResultsView: View {
                                 }
                                 .font(.subheadlineMedium)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 12)
+                                .padding(.vertical, .paddingSmall)
                                 .overlay(
                                     Capsule()
                                         .stroke(Color.theme, lineWidth: 1.5)
@@ -105,9 +105,9 @@ struct FoodRecognitionResultsView: View {
                             }
                             .foregroundStyle(Color.theme)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 12)
-                        .padding(.bottom, 8)
+                        .padding(.horizontal, .paddingMedium)
+                        .padding(.top, .paddingSmall)
+                        .padding(.bottom, .paddingXs)
                         .background(.bar)
                     }
                 }
@@ -121,7 +121,7 @@ struct FoodRecognitionResultsView: View {
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.secondary)
             }
-            .padding(.trailing, 16)
+            .padding(.trailing, .paddingMedium)
             .padding(.top, 14)
         }
         .task {
@@ -130,12 +130,12 @@ struct FoodRecognitionResultsView: View {
     }
 
     private func candidateRow(_ candidate: FoodCandidate) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: .spacingMedium) {
             Image(systemName: selectedIDs.contains(candidate.id) ? "checkmark.circle.fill" : "circle")
                 .font(.title3)
                 .foregroundStyle(selectedIDs.contains(candidate.id) ? Color.theme : .secondary)
-            VStack(alignment: .leading, spacing: 12) {
-                VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: .spacingMedium) {
+                VStack(alignment: .leading, spacing: .spacingXxs) {
                     Text(candidate.name)
                         .font(.headline)
 
@@ -144,7 +144,7 @@ struct FoodRecognitionResultsView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                FlowLayout(spacing: 6) {
+                FlowLayout(spacing: .flowLayoutSpacing) {
                     nutrientPill(value: "\(candidate.calories)", label: "calories", color: Color.theme)
                     nutrientPill(
                         value: "\(String(format: "%.0f", candidate.proteinGrams))g",
@@ -163,20 +163,20 @@ struct FoodRecognitionResultsView: View {
                     )
                 }
             }
-            .padding(.vertical, 4)
+            .padding(.vertical, .paddingXxs)
         }
     }
 
     private func nutrientPill(value: String, label: String, color: Color) -> some View {
-        HStack(spacing: 3) {
+        HStack(spacing: .pillSpacing) {
             Text(value)
                 .font(.captionSemibold)
             Text(label)
                 .font(.caption2Medium)
         }
         .foregroundStyle(Color.cardBackground)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 5)
+        .padding(.horizontal, .paddingXs)
+        .padding(.vertical, .pillPadding)
         .background(color, in: RoundedRectangle(cornerRadius: 6))
     }
 

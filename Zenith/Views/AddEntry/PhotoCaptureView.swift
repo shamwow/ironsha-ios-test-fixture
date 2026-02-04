@@ -12,18 +12,18 @@ struct PhotoCaptureView: View {
     let onFoodRecognized: (String, Int, Double, Double, Double) -> Void
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: .paddingLarge) {
             if let image = capturedImage {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 300)
+                    .frame(maxHeight: .photoPreviewMaxHeight)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
 
                 if isRecognizing {
                     ProgressView("Recognizing food...")
                 } else if let result = recognitionResult {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: .spacingSmall) {
                         Text(result.name)
                             .font(.headline)
                         Text("\(result.calories) kcal per serving")
@@ -53,7 +53,7 @@ struct PhotoCaptureView: View {
                     showCamera = true
                 }
             } else {
-                VStack(spacing: 16) {
+                VStack(spacing: .spacingLarge) {
                     Image(systemName: "camera.fill")
                         .font(.iconLarge)
                         .foregroundStyle(.secondary)
