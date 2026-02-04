@@ -91,7 +91,7 @@ struct AddEntryView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     // Large title in content
                     Text(isEditing ? "Edit Entry" : "Add Entry")
-                        .font(.system(size: 34, weight: .bold))
+                        .font(.pageTitle)
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
                         .padding(.horizontal, 16)
@@ -244,7 +244,7 @@ struct AddEntryView: View {
 
                         HStack {
                             Text("\(servings, specifier: "%.1f")")
-                                .font(.body.monospacedDigit())
+                                .font(.bodyMonospaced)
                             Spacer()
                             Stepper("", value: $servings, in: 0.5 ... 20, step: 0.5)
                                 .labelsHidden()
@@ -298,7 +298,7 @@ struct AddEntryView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 28))
+                            .font(.iconRegular)
                             .symbolRenderingMode(.hierarchical)
                             .foregroundStyle(.secondary)
                     }
@@ -356,7 +356,7 @@ struct AddEntryView: View {
     private func sectionHeader(_ title: String, required: Bool) -> some View {
         HStack(spacing: 4) {
             Text(title)
-                .font(.subheadline.weight(.semibold))
+                .font(.subheadlineSemibold)
                 .foregroundStyle(.secondary)
             if required {
                 Text("(required)")

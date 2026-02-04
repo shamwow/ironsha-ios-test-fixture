@@ -135,7 +135,7 @@ struct DashboardView: View {
 
                     VStack(spacing: 8) {
                         Text("Macros")
-                            .font(.subheadline.weight(.semibold))
+                            .font(.subheadlineSemibold)
                             .foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -160,7 +160,7 @@ struct DashboardView: View {
                     })
                     .padding(.horizontal, 16)
                 }
-                .padding(.top, 60)
+                .padding(.top, 74)
                 .padding(.bottom, 100)
             }
             .offset(x: slideOffset)
@@ -170,7 +170,7 @@ struct DashboardView: View {
                 ZStack(alignment: .leading) {
                     if !showCalorieInHeader {
                         Text(isToday ? "Today" : selectedDate.weekdayName)
-                            .font(.title.bold())
+                            .font(.pageTitle)
                             .transition(.asymmetric(
                                 insertion: .scale(scale: 0, anchor: .top).combined(with: .opacity),
                                 removal: .scale(scale: 0, anchor: .bottom).combined(with: .opacity)
@@ -180,9 +180,9 @@ struct DashboardView: View {
                     if showCalorieInHeader {
                         HStack(alignment: .firstTextBaseline, spacing: 2) {
                             Text("\(totalCalories)")
-                                .font(.title.bold())
+                                .font(.pageTitle)
                             Text("/ \(calorieGoal) kcal")
-                                .font(.subheadline)
+                                .font(.subheadlineRegular)
                                 .foregroundStyle(.secondary)
                         }
                         .transition(.asymmetric(
@@ -200,7 +200,7 @@ struct DashboardView: View {
                         goBack()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 14, weight: .semibold))
+                            .font(.iconChevron)
                     }
                     .disabled(isAnimating)
 
@@ -209,13 +209,13 @@ struct DashboardView: View {
                         showDatePicker = true
                     } label: {
                         Image(systemName: "calendar")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.iconSmall)
                             .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
 
                     Text(selectedDate.dayAndMonth)
-                        .font(.subheadline)
+                        .font(.subheadlineRegular)
                         .foregroundStyle(.secondary)
                         .fixedSize()
 
@@ -223,7 +223,7 @@ struct DashboardView: View {
                         goForward()
                     } label: {
                         Image(systemName: "chevron.right")
-                            .font(.system(size: 14, weight: .semibold))
+                            .font(.iconChevron)
                     }
                     .disabled(isToday || isAnimating)
                 }
@@ -264,7 +264,7 @@ struct DashboardView: View {
                             showDatePicker = false
                         } label: {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 24))
+                                .font(.iconToolbar)
                                 .symbolRenderingMode(.hierarchical)
                                 .foregroundStyle(.secondary)
                         }

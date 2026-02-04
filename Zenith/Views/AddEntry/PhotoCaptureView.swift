@@ -55,7 +55,7 @@ struct PhotoCaptureView: View {
             } else {
                 VStack(spacing: 16) {
                     Image(systemName: "camera.fill")
-                        .font(.system(size: 60))
+                        .font(.iconLarge)
                         .foregroundStyle(.secondary)
 
                     Text("Take a photo of your food")

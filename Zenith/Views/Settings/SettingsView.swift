@@ -19,7 +19,7 @@ struct SettingsView: View {
             Form {
                 Section {
                     Text("Settings")
-                        .font(.system(size: 34, weight: .bold))
+                        .font(.pageTitle)
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
                         .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
@@ -140,7 +140,7 @@ struct SettingsView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 28))
+                            .font(.iconRegular)
                             .symbolRenderingMode(.hierarchical)
                             .foregroundStyle(.secondary)
                     }

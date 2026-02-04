@@ -14,6 +14,7 @@
 		2383CC2AA3744372B54AD8B1 /* PhotoCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0199E360537F4C6499824970 /* PhotoCaptureView.swift */; };
 		27B13E4A79214A428C212FB1 /* Color+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1881E19C0C4537A2ABFC48 /* Color+Theme.swift */; };
 		30CCE1F32F3166F500984462 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCE1F22F3166F000984462 /* ViewExtensions.swift */; };
+		30CCE1F72F33B31100984462 /* Font+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CCE1F62F33B31100984462 /* Font+Theme.swift */; };
 		464511A440A34C5493215E54 /* FoodRecognitionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257424FC30CE4C269F50645E /* FoodRecognitionRequest.swift */; };
 		5566E7C09732403AA81DE12A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DA80B1BDD4F1C85E7A5C3 /* SettingsView.swift */; };
 		5675B01BC40A41509E2C53FC /* ZenithApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C6B6ED0A4B414E8FBB049C /* ZenithApp.swift */; };
@@ -51,6 +52,7 @@
 		22FF32C1DA3149E181EBB9C6 /* MacroSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroSummaryView.swift; sourceTree = "<group>"; };
 		257424FC30CE4C269F50645E /* FoodRecognitionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRecognitionRequest.swift; sourceTree = "<group>"; };
 		30CCE1F22F3166F000984462 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		30CCE1F62F33B31100984462 /* Font+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Theme.swift"; sourceTree = "<group>"; };
 		4C60A362756C4163A148014D /* LiveAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAPIClient.swift; sourceTree = "<group>"; };
 		59FCB9274DAF4382A2BC00C8 /* SyncUploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUploadResponse.swift; sourceTree = "<group>"; };
 		6A1881E19C0C4537A2ABFC48 /* Color+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Theme.swift"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		96D79AC53CFC471A94D84329 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				30CCE1F62F33B31100984462 /* Font+Theme.swift */,
 				6A1881E19C0C4537A2ABFC48 /* Color+Theme.swift */,
 				73F1543EC1C6453AB38E320A /* Date+Extensions.swift */,
 				D4E5F6A7B8C949DA8B0C1D2E /* FlowLayout.swift */,
@@ -317,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30CCE1F72F33B31100984462 /* Font+Theme.swift in Sources */,
 				D9E6F95D3E0948F4B3F11D0A /* ContentView.swift in Sources */,
 				5675B01BC40A41509E2C53FC /* ZenithApp.swift in Sources */,
 				8DDAED55967346B7A3FD9A4E /* FoodEntry.swift in Sources */,

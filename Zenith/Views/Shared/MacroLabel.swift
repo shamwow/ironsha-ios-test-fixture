@@ -20,7 +20,7 @@ struct MacroLabel: View {
                 .frame(width: 8, height: 8)
 
             Text("\(name): \(value, specifier: "%.1f")\(unit)")
-                .font(.caption)
+                .font(.captionRegular)
                 .foregroundStyle(.secondary)
         }
         .padding(.horizontal, 8)
