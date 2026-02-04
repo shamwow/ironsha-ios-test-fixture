@@ -95,7 +95,7 @@ struct FoodRecognitionResultsView: View {
                                     Image(systemName: "pencil.line")
                                     Text("Enter Manually")
                                 }
-                                .font(.subheadline.weight(.medium))
+                                .font(.subheadlineMedium)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 12)
                                 .overlay(
@@ -117,7 +117,7 @@ struct FoodRecognitionResultsView: View {
                 dismiss()
             } label: {
                 Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 28))
+                    .font(.iconRegular)
                     .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.secondary)
             }
@@ -170,9 +170,9 @@ struct FoodRecognitionResultsView: View {
     private func nutrientPill(value: String, label: String, color: Color) -> some View {
         HStack(spacing: 3) {
             Text(value)
-                .font(.caption.weight(.semibold))
+                .font(.captionSemibold)
             Text(label)
-                .font(.caption2.weight(.medium))
+                .font(.caption2Medium)
         }
         .foregroundStyle(Color.cardBackground)
         .padding(.horizontal, 8)

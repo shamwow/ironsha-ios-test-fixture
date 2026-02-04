@@ -25,9 +25,9 @@ struct HistoryView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(date.isToday ? "Today" : date.shortFormatted)
-                                .font(.body.weight(.medium))
+                                .font(.bodyMedium)
                             Text(date.weekdayName)
-                                .font(.caption)
+                                .font(.captionRegular)
                                 .foregroundStyle(.secondary)
                         }
 
@@ -39,7 +39,7 @@ struct HistoryView: View {
 
                         HStack(spacing: 12) {
                             Text("\(total) kcal")
-                                .font(.subheadline.monospacedDigit())
+                                .font(.subheadlineMonospaced)
                                 .foregroundStyle(.secondary)
 
                             ZStack {

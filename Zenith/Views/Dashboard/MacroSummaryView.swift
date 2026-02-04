@@ -43,12 +43,12 @@ private struct MacroRing: View {
                     .animation(.easeInOut(duration: 0.5), value: fraction)
 
                 Text("\(Int(value))g")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .font(.macroValue)
             }
             .frame(width: 64, height: 64)
 
             Text(label)
-                .font(.caption)
+                .font(.captionRegular)
                 .foregroundStyle(.secondary)
         }
     }

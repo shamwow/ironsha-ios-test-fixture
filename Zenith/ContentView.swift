@@ -67,7 +67,7 @@ struct ContentView: View {
                     // Social — placeholder
                 } label: {
                     Image(systemName: "person.2")
-                        .font(.system(size: 24, weight: .medium))
+                        .font(.iconToolbar)
                         .frame(width: 60, height: 60)
                 }
 
@@ -75,7 +75,7 @@ struct ContentView: View {
                     showSettings = true
                 } label: {
                     Image(systemName: "gearshape")
-                        .font(.system(size: 24, weight: .medium))
+                        .font(.iconToolbar)
                         .frame(width: 60, height: 60)
                 }
             }
@@ -118,7 +118,7 @@ private struct AddButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "plus")
-                .font(.system(size: 24, weight: .medium))
+                .font(.iconToolbar)
                 .foregroundStyle(Color.white)
                 .frame(width: 60, height: 60)
         }

@@ -49,12 +49,12 @@ struct DayDetailView: View {
                             Text(
                                 "\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())"
                             )
-                            .font(.caption)
+                            .font(.captionRegular)
                             .foregroundStyle(.secondary)
                         }
                         Spacer()
                         Text("\(entry.totalCalories) kcal")
-                            .font(.subheadline.monospacedDigit())
+                            .font(.subheadlineMonospaced)
                             .foregroundStyle(.secondary)
                     }
                 }

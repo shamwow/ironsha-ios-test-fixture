@@ -17,12 +17,12 @@ struct RecentEntriesCardView: View {
         if entries.isEmpty {
             VStack(spacing: 8) {
                 Image(systemName: "fork.knife")
-                    .font(.system(size: 32))
+                    .font(.iconMedium)
                     .foregroundStyle(.secondary)
                 Text("No entries yet")
-                    .font(.subheadline.weight(.semibold))
+                    .font(.subheadlineSemibold)
                 Text("Tap + to log your first meal.")
-                    .font(.caption)
+                    .font(.captionRegular)
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity)
@@ -97,9 +97,9 @@ struct RecentEntriesCardView: View {
     private func nutrientPill(value: String, label: String, color: Color) -> some View {
         HStack(spacing: 3) {
             Text(value)
-                .font(.caption.weight(.semibold))
+                .font(.captionSemibold)
             Text(label)
-                .font(.caption2.weight(.medium))
+                .font(.caption2Medium)
         }
         .foregroundStyle(Color.cardBackground)
         .padding(.horizontal, 8)
