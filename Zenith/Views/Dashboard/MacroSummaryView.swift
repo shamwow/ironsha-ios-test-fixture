@@ -9,13 +9,13 @@ struct MacroSummaryView: View {
     var carbsGoal: Double = 250
 
     var body: some View {
-        HStack(spacing: 36) {
+        HStack(spacing: CGFloat.spacingXxlarge) {
             MacroRing(label: "Protein", value: protein, color: .proteinColor, goal: proteinGoal)
             MacroRing(label: "Fat", value: fat, color: .fatColor, goal: fatGoal)
             MacroRing(label: "Carbs", value: carbs, color: .carbsColor, goal: carbsGoal)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.vertical, CGFloat.paddingXs)
     }
 }
 
@@ -31,7 +31,7 @@ private struct MacroRing: View {
     }
 
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: CGFloat.flowLayoutSpacing) {
             ZStack {
                 Circle()
                     .stroke(color.opacity(0.2), lineWidth: 8)
@@ -45,7 +45,7 @@ private struct MacroRing: View {
                 Text("\(Int(value))g")
                     .font(.macroValue)
             }
-            .frame(width: 64, height: 64)
+            .frame(width: CGFloat.macroRingSize, height: CGFloat.macroRingSize)
 
             Text(label)
                 .font(.captionRegular)

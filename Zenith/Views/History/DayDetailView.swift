@@ -30,7 +30,7 @@ struct DayDetailView: View {
         List {
             Section {
                 CalorieRingView(consumed: totalCalories, goal: calorieGoal)
-                    .frame(height: 200)
+                    .frame(height: .calorieCardHeight)
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
             }
@@ -44,7 +44,7 @@ struct DayDetailView: View {
             Section {
                 ForEach(sortedEntries, id: \.id) { entry in
                     HStack {
-                        VStack(alignment: .leading, spacing: 2) {
+                        VStack(alignment: .leading, spacing: .spacingXxs) {
                             Text(entry.name)
                             Text(
                                 "\(entry.servings, specifier: "%.1f") serving\(entry.servings == 1 ? "" : "s") · \(entry.loggedAt, format: .dateTime.hour().minute())"

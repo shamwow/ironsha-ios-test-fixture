@@ -23,7 +23,7 @@ struct HistoryView: View {
                     DayDetailView(date: date, entries: entries, calorieGoal: calorieGoal)
                 } label: {
                     HStack {
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading, spacing: .spacingXs) {
                             Text(date.isToday ? "Today" : date.shortFormatted)
                                 .font(.bodyMedium)
                             Text(date.weekdayName)
@@ -37,7 +37,7 @@ struct HistoryView: View {
                         let progress = min(Double(total) / Double(calorieGoal), 1.0)
                         let isOver = total > calorieGoal
 
-                        HStack(spacing: 12) {
+                        HStack(spacing: .spacingMedium) {
                             Text("\(total) kcal")
                                 .font(.subheadlineMonospaced)
                                 .foregroundStyle(.secondary)
@@ -48,7 +48,7 @@ struct HistoryView: View {
                                         isOver ? Color.ringOver.opacity(0.2) : Color.ringUnder.opacity(0.2),
                                         lineWidth: 4
                                     )
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: .historyRingSize, height: .historyRingSize)
 
                                 Circle()
                                     .trim(from: 0, to: progress)
@@ -56,12 +56,12 @@ struct HistoryView: View {
                                         isOver ? Color.ringOver : Color.ringUnder,
                                         style: StrokeStyle(lineWidth: 4, lineCap: .round)
                                     )
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: .historyRingSize, height: .historyRingSize)
                                     .rotationEffect(.degrees(-90))
                             }
                         }
                     }
-                    .padding(.vertical, 4)
+                    .padding(.vertical, .paddingXxs)
                 }
             }
         }

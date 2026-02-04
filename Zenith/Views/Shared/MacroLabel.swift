@@ -14,17 +14,17 @@ struct MacroLabel: View {
     }
 
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: .spacingXs) {
             Circle()
                 .fill(color)
-                .frame(width: 8, height: 8)
+                .frame(width: .dotIndicatorSize, height: .dotIndicatorSize)
 
             Text("\(name): \(value, specifier: "%.1f")\(unit)")
                 .font(.captionRegular)
                 .foregroundStyle(.secondary)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
+        .padding(.horizontal, .paddingXs)
+        .padding(.vertical, .paddingXxs)
         .background(color.opacity(0.1), in: Capsule())
     }
 }

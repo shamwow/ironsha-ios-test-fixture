@@ -15,7 +15,7 @@ struct RecentEntriesCardView: View {
 
     var body: some View {
         if entries.isEmpty {
-            VStack(spacing: 8) {
+            VStack(spacing: .spacingSmall) {
                 Image(systemName: "fork.knife")
                     .font(.iconMedium)
                     .foregroundStyle(.secondary)
@@ -26,14 +26,14 @@ struct RecentEntriesCardView: View {
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 32)
+            .padding(.vertical, .paddingXlarge)
             .background(Color.cardBackground, in: RoundedRectangle(cornerRadius: 12))
         } else {
-            VStack(spacing: 0) {
+            VStack(spacing: .spacingNone) {
 
                 ForEach(Array(sortedEntries.enumerated()), id: \.element.id) { index, entry in
-                    VStack(alignment: .leading, spacing: 8) {
-                        VStack(alignment: .leading, spacing: 2) {
+                    VStack(alignment: .leading, spacing: .spacingSmall) {
+                        VStack(alignment: .leading, spacing: .spacingXxs) {
                             Text(entry.name)
                                 .font(.headline)
                             Text(
@@ -43,7 +43,7 @@ struct RecentEntriesCardView: View {
                             .foregroundStyle(.secondary)
                         }
 
-                        FlowLayout(spacing: 6) {
+                        FlowLayout(spacing: .flowLayoutSpacing) {
                             nutrientPill(value: "\(entry.totalCalories)", label: "calories", color: Color.theme)
                             nutrientPill(
                                 value: "\(String(format: "%.0f", entry.totalProtein))g",
@@ -62,7 +62,7 @@ struct RecentEntriesCardView: View {
                             )
                         }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, .paddingMedium)
                     .padding(.vertical, 10)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -85,7 +85,7 @@ struct RecentEntriesCardView: View {
 
                     if index < sortedEntries.count - 1 {
                         Divider()
-                            .padding(.leading, 16)
+                            .padding(.leading, .paddingMedium)
                     }
                 }
             }
@@ -95,15 +95,15 @@ struct RecentEntriesCardView: View {
     }
 
     private func nutrientPill(value: String, label: String, color: Color) -> some View {
-        HStack(spacing: 3) {
+        HStack(spacing: .pillSpacing) {
             Text(value)
                 .font(.captionSemibold)
             Text(label)
                 .font(.caption2Medium)
         }
         .foregroundStyle(Color.cardBackground)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 5)
+        .padding(.horizontal, .paddingXs)
+        .padding(.vertical, .pillPadding)
         .background(color, in: RoundedRectangle(cornerRadius: 6))
     }
 }
