@@ -91,7 +91,7 @@ struct AddEntryView: View {
                 VStack(alignment: .leading, spacing: .spacingXlarge) {
                     // Large title in content
                     Text(isEditing ? "Edit Entry" : "Add Entry")
-                        .font(.pageTitle)
+                        .font(.titleBold)
                         .foregroundStyle(Color.theme)
                         .opacity(showHeaderTitle ? 0 : 1)
                         .padding(.horizontal, .paddingMedium)

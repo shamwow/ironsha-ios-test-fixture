@@ -44,18 +44,6 @@ struct DashboardView: View {
         selectedEntries.reduce(0) { $0 + $1.totalCarbs }
     }
 
-    private var remaining: Int {
-        calorieGoal - totalCalories
-    }
-
-    private var headerTitle: String {
-        if showCalorieInHeader {
-            let r = remaining
-            return r >= 0 ? "\(r) remaining" : "\(abs(r)) over"
-        }
-        return isToday ? "Today" : selectedDate.weekdayName
-    }
-
     private let slideOut: Animation = .easeIn(duration: 0.18)
     private let slideIn: Animation = .spring(response: 0.35, dampingFraction: 0.86)
 
@@ -170,7 +158,7 @@ struct DashboardView: View {
                 ZStack(alignment: .leading) {
                     if !showCalorieInHeader {
                         Text(isToday ? "Today" : selectedDate.weekdayName)
-                            .font(.pageTitle)
+                            .font(.titleBold)
                             .transition(.asymmetric(
                                 insertion: .scale(scale: 0, anchor: .top).combined(with: .opacity),
                                 removal: .scale(scale: 0, anchor: .bottom).combined(with: .opacity)
@@ -180,7 +168,7 @@ struct DashboardView: View {
                     if showCalorieInHeader {
                         HStack(alignment: .firstTextBaseline, spacing: .spacingXxs) {
                             Text("\(totalCalories)")
-                                .font(.pageTitle)
+                                .font(.titleBold)
                             Text("/ \(calorieGoal) kcal")
                                 .font(.subheadlineRegular)
                                 .foregroundStyle(.secondary)
