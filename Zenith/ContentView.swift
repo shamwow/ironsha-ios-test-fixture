@@ -61,41 +61,41 @@ struct ContentView: View {
     }
 
     private var bottomBar: some View {
-        ZStack {
-            // Background pill
-            HStack(spacing: 0) {
+        HStack {
+            HStack(spacing: 16) {
                 Button {
                     // Social — placeholder
                 } label: {
                     Image(systemName: "person.2")
-                        .font(.system(size: 20, weight: .medium))
-                        .frame(width: 48, height: 48)
+                        .font(.system(size: 24, weight: .medium))
+                        .frame(width: 60, height: 60)
                 }
-                .tint(Color.cardBackground)
-
-                Spacer()
-                    .frame(width: 120)
 
                 Button {
                     showSettings = true
                 } label: {
                     Image(systemName: "gearshape")
-                        .font(.system(size: 20, weight: .medium))
-                        .frame(width: 48, height: 48)
+                        .font(.system(size: 24, weight: .medium))
+                        .frame(width: 60, height: 60)
                 }
-                .tint(Color.cardBackground)
             }
-            .padding(.horizontal, 44)
-            .padding(.vertical, 8)
-            .background(Color.theme, in: Capsule())
-            .shadow(color: Color.theme.opacity(0.3), radius: 12, y: 4)
-
-            // Plus button centered, extending above and below
+            .modify { view in
+                if #available(iOS 26.0, *) {
+                    view.glassEffect(.regular.interactive(), in: Capsule())
+                } else {
+                    view
+                        .background(.ultraThinMaterial, in: Capsule())
+                }
+            }
+            
+            Spacer()
+            
             AddButton {
                 capturedImage = nil
                 showCamera = true
             }
         }
+        .padding(.horizontal, 16)
         .padding(.bottom, 8)
     }
 
@@ -114,22 +114,20 @@ struct AddEntryRequest: Identifiable {
 
 private struct AddButton: View {
     let action: () -> Void
-    @State private var isPressed = false
 
     var body: some View {
-        Image(systemName: "plus")
-            .font(.system(size: 26, weight: .bold))
-            .foregroundStyle(isPressed ? Color.cardBackground : Color.theme)
-            .frame(width: 55, height: 55)
-            .background(isPressed ? Color.themeDark : Color.cardBackground, in: Circle())
-            .frame(width: 80, height: 80)
-            .background(isPressed ? Color.themeDark : Color.theme, in: Circle())
-            .animation(.easeInOut(duration: 0.15), value: isPressed)
-            .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
-                isPressed = pressing
-            }, perform: {})
-            .simultaneousGesture(TapGesture().onEnded {
-                action()
-            })
+        Button(action: action) {
+            Image(systemName: "plus")
+                .font(.system(size: 24, weight: .medium))
+                .foregroundStyle(Color.white)
+                .frame(width: 60, height: 60)
+        }
+        .modify { view in
+            if #available(iOS 26.0, *) {
+                view.glassEffect(.clear.interactive().tint(Color.theme.opacity(0.9)), in: Circle())
+            } else {
+                view.background(.ultraThinMaterial, in: Circle())
+            }
+        }
     }
 }
