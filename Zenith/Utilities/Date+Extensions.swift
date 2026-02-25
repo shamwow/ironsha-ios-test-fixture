@@ -39,6 +39,29 @@ extension Date {
         return formatter.string(from: self)
     }
 
+    var startOfWeek: Date {
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: self)
+        return calendar.date(byAdding: .day, value: -(weekday - 1), to: startOfDay)!
+    }
+
+    var daysOfWeek: [Date] {
+        let start = startOfWeek
+        return (0 ..< 7).map {
+            Calendar.current.date(byAdding: .day, value: $0, to: start)!
+        }
+    }
+
+    var shortWeekdayInitial: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEEE"
+        return formatter.string(from: self)
+    }
+
+    var dayNumber: Int {
+        Calendar.current.component(.day, from: self)
+    }
+
     static func daysAgo(_ days: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: -days, to: .now)!
     }

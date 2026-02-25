@@ -47,45 +47,15 @@ struct DashboardView: View {
     private let slideOut: Animation = .easeIn(duration: 0.18)
     private let slideIn: Animation = .spring(response: 0.35, dampingFraction: 0.86)
 
-    private func goBack() {
-        isAnimating = true
-        withAnimation(slideOut) {
-            slideOffset = 300
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
-            selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate)!
-            slideOffset = -300
-            withAnimation(slideIn) {
-                slideOffset = 0
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                isAnimating = false
-            }
-        }
-    }
+    // MARK: - Date Navigation
 
-    private func goForward() {
-        isAnimating = true
-        withAnimation(slideOut) {
-            slideOffset = -300
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
-            selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate)!
-            slideOffset = 300
-            withAnimation(slideIn) {
-                slideOffset = 0
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                isAnimating = false
-            }
-        }
-    }
-
-    private func applyPickerDate(_ newDate: Date) {
+    private func selectDate(_ newDate: Date) {
         let oldDay = selectedDate.startOfDay
         let newDay = newDate.startOfDay
         guard oldDay != newDay else { return }
+        guard !isAnimating else { return }
 
+        isAnimating = true
         let direction: CGFloat = newDay > oldDay ? -300 : 300
         withAnimation(slideOut) {
             slideOffset = direction
@@ -96,8 +66,13 @@ struct DashboardView: View {
             withAnimation(slideIn) {
                 slideOffset = 0
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                isAnimating = false
+            }
         }
     }
+
+    // MARK: - Body
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -148,13 +123,13 @@ struct DashboardView: View {
                     })
                     .padding(.horizontal, .paddingMedium)
                 }
-                .padding(.top, 74)
+                .padding(.top, 130)
                 .padding(.bottom, 100)
             }
             .offset(x: slideOffset)
 
             // Fixed header overlay
-            HStack {
+            VStack(spacing: .spacingSmall) {
                 ZStack(alignment: .leading) {
                     if !showCalorieInHeader {
                         Text(isToday ? "Today" : selectedDate.weekdayName)
@@ -180,51 +155,28 @@ struct DashboardView: View {
                     }
                 }
                 .animation(.spring(response: 0.35, dampingFraction: 0.8), value: showCalorieInHeader)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-                Spacer()
-
-                HStack(spacing: .spacingSmall) {
-                    Button {
-                        goBack()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.iconChevron)
-                    }
-                    .disabled(isAnimating)
-
-                    Button {
+                WeekStripView(
+                    selectedDate: selectedDate,
+                    entries: allEntries,
+                    calorieGoal: calorieGoal,
+                    isAnimating: isAnimating,
+                    onDateSelected: { day in selectDate(day) },
+                    onLongPress: {
                         pickerDate = selectedDate
                         showDatePicker = true
-                    } label: {
-                        Image(systemName: "calendar")
-                            .font(.iconSmall)
-                            .foregroundStyle(.secondary)
                     }
-                    .buttonStyle(.plain)
-
-                    Text(selectedDate.dayAndMonth)
-                        .font(.subheadlineRegular)
-                        .foregroundStyle(.secondary)
-                        .fixedSize()
-
-                    Button {
-                        goForward()
-                    } label: {
-                        Image(systemName: "chevron.right")
-                            .font(.iconChevron)
-                    }
-                    .disabled(isToday || isAnimating)
-                }
+                )
             }
-            .padding(.horizontal, .paddingXlarge)
-            .padding(.vertical, 10)
-            .offset(x: slideOffset)
+            .padding(.horizontal, .paddingMedium)
+            .padding(.vertical, .paddingSmall)
             .background(.ultraThinMaterial)
         }
         .background(Color.surfaceBackground)
         .navigationBarHidden(true)
         .sheet(isPresented: $showDatePicker, onDismiss: {
-            applyPickerDate(pickerDate)
+            selectDate(pickerDate)
         }) {
             NavigationStack {
                 DatePicker(
