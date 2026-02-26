@@ -81,6 +81,7 @@ Zenith/
 
 ## Contributing
 - **Read `CONTRIBUTING.md` before opening PRs** — it defines the review-bot label workflow (`bot-review-needed` → `bot-changes-needed` → `human-review-needed`)
+- **Always add the `bot-review-needed` label when creating a PR** — the review bot will not pick up the PR without it
 - Update `ARCHITECTURE.md` if your change introduces new modules, layers, or alters data flow
 - Address every review-bot comment thread before re-requesting review
 - Ensure build and tests pass before applying `bot-review-needed` label
