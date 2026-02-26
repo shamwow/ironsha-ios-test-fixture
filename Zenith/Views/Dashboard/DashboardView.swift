@@ -13,7 +13,7 @@ struct DashboardView: View {
     @State private var isAnimating = false
     @State private var showCalorieInHeader = false
     @State private var editingEntry: FoodEntry?
-    @State private var headerHeight: CGFloat = 130
+    @State private var headerHeight: CGFloat = .dashboardHeaderEstimate
 
     private var selectedEntries: [FoodEntry] {
         let start = selectedDate.startOfDay
