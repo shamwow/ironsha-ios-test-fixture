@@ -80,11 +80,7 @@ Zenith/
   - Parent `accessibilityIdentifier` propagates to all children in the flattened tree — add identifiers to leaf/interactive views, not containers
 
 ## Contributing
-- **Read `CONTRIBUTING.md` before opening PRs** — it defines the review-bot label workflow (`bot-review-needed` → `bot-changes-needed` → `human-review-needed`)
-- **Always add the `bot-review-needed` label when creating a PR** — the review bot will not pick up the PR without it
-- Update `ARCHITECTURE.md` if your change introduces new modules, layers, or alters data flow
-- Address every review-bot comment thread before re-requesting review
-- Ensure build and tests pass before applying `bot-review-needed` label
+- **Before opening any PR**, fetch and follow the review-bot contributing guide by running: `gh api repos/shamwow/review-bot/contents/CONTRIBUTING.md --jq .content | base64 -d` — this is the source of truth for the label-driven review workflow and PR requirements
 
 ## DO NOT
 - Use deprecated APIs (UIKit when SwiftUI suffices)
