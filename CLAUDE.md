@@ -79,6 +79,12 @@ Zenith/
   - SwiftUI toolbar buttons inside a sheet's `NavigationStack` are not exposed to external accessibility tools — the nav bar appears as a group with no children; use coordinate-based taps as fallback
   - Parent `accessibilityIdentifier` propagates to all children in the flattened tree — add identifiers to leaf/interactive views, not containers
 
+## Contributing
+- **Read `CONTRIBUTING.md` before opening PRs** — it defines the review-bot label workflow (`bot-review-needed` → `bot-changes-needed` → `human-review-needed`)
+- Update `ARCHITECTURE.md` if your change introduces new modules, layers, or alters data flow
+- Address every review-bot comment thread before re-requesting review
+- Ensure build and tests pass before applying `bot-review-needed` label
+
 ## DO NOT
 - Use deprecated APIs (UIKit when SwiftUI suffices)
 - Create massive monolithic views (extract at ~100 lines)
