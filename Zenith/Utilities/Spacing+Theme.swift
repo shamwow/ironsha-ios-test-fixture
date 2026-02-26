@@ -32,6 +32,7 @@ extension CGFloat {
     static let progressBarHeight: CGFloat = 14
     static let calorieCardHeight: CGFloat = 200
     static let photoPreviewMaxHeight: CGFloat = 300
+    static let datePickerSheetHeight: CGFloat = 460
 
     // MARK: - Input Fields
 
