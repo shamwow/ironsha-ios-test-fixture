@@ -69,6 +69,16 @@ Zenith/
 - Use Swift Testing framework (`@Test`, `#expect`) for new tests
 - Unit tests for all ViewModels and Services
 
+### UI Automation (XcodeBuildMCP)
+- Config lives in `.xcodebuildmcp/config.yaml` with `ui-automation` enabled
+- Use `snapshot_ui` to get element coordinates — never guess from screenshots
+- The `tap` tool supports `label` (AXLabel) and `id` (AXUniqueId) targeting — prefer these over raw coordinates
+- Add `.accessibilityIdentifier("name")` to interactive views so they're targetable by id/label
+- **Known limitations:**
+  - Native `DatePicker(.graphical)` is a single opaque accessibility group — its internal controls (month arrows, date cells) are not individually targetable
+  - SwiftUI toolbar buttons inside a sheet's `NavigationStack` are not exposed to external accessibility tools — the nav bar appears as a group with no children; use coordinate-based taps as fallback
+  - Parent `accessibilityIdentifier` propagates to all children in the flattened tree — add identifiers to leaf/interactive views, not containers
+
 ## DO NOT
 - Use deprecated APIs (UIKit when SwiftUI suffices)
 - Create massive monolithic views (extract at ~100 lines)
