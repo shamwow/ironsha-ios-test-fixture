@@ -13,6 +13,7 @@ struct DashboardView: View {
     @State private var isAnimating = false
     @State private var showCalorieInHeader = false
     @State private var editingEntry: FoodEntry?
+    @State private var headerHeight: CGFloat = .dashboardHeaderEstimate
 
     private var selectedEntries: [FoodEntry] {
         let start = selectedDate.startOfDay
@@ -123,7 +124,7 @@ struct DashboardView: View {
                     })
                     .padding(.horizontal, .paddingMedium)
                 }
-                .padding(.top, 130)
+                .padding(.top, headerHeight)
                 .padding(.bottom, 100)
             }
             .offset(x: slideOffset)
@@ -172,6 +173,13 @@ struct DashboardView: View {
             .padding(.horizontal, .paddingMedium)
             .padding(.vertical, .paddingSmall)
             .background(.ultraThinMaterial)
+            .overlay(
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear { headerHeight = geo.size.height }
+                        .onChange(of: geo.size.height) { _, newValue in headerHeight = newValue }
+                }
+            )
         }
         .background(Color.surfaceBackground)
         .navigationBarHidden(true)
@@ -179,14 +187,18 @@ struct DashboardView: View {
             selectDate(pickerDate)
         }) {
             NavigationStack {
-                DatePicker(
-                    "Select Date",
-                    selection: $pickerDate,
-                    in: ...Date.now,
-                    displayedComponents: .date
-                )
-                .datePickerStyle(.graphical)
-                .padding(.horizontal)
+                VStack {
+                    DatePicker(
+                        "Select Date",
+                        selection: $pickerDate,
+                        in: ...Date.now,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.graphical)
+                    .padding(.horizontal)
+
+                    Spacer()
+                }
                 .navigationTitle("Go to Date")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -197,6 +209,8 @@ struct DashboardView: View {
                         } label: {
                             Text("Today")
                         }
+                        .accessibilityIdentifier("datePickerToday")
+                        .accessibilityLabel("Today")
                         .disabled(Calendar.current.isDateInToday(pickerDate))
                     }
                     ToolbarItem(placement: .topBarTrailing) {
@@ -208,11 +222,13 @@ struct DashboardView: View {
                                 .symbolRenderingMode(.hierarchical)
                                 .foregroundStyle(.secondary)
                         }
+                        .accessibilityIdentifier("datePickerClose")
+                        .accessibilityLabel("Close")
                     }
                 }
             }
             .tint(Color.theme)
-            .presentationDetents([.medium])
+            .presentationDetents([.height(.datePickerSheetHeight)])
         }
         .sheet(item: $editingEntry) { entry in
             AddEntryView(editingEntry: entry)
