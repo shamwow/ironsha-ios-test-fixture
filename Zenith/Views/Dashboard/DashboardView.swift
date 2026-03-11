@@ -13,7 +13,7 @@ struct DashboardView: View {
     @State private var isAnimating = false
     @State private var showCalorieInHeader = false
     @State private var editingEntry: FoodEntry?
-    @State private var headerHeight: CGFloat = 0
+    @State private var headerHeight: CGFloat = .dashboardHeaderEstimate
 
     private var selectedEntries: [FoodEntry] {
         let start = selectedDate.startOfDay
@@ -228,7 +228,7 @@ struct DashboardView: View {
                 }
             }
             .tint(Color.theme)
-            .presentationDetents([.height(460)])
+            .presentationDetents([.height(.datePickerSheetHeight)])
         }
         .sheet(item: $editingEntry) { entry in
             AddEntryView(editingEntry: entry)
