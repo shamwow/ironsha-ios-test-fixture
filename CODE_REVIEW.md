@@ -1,6 +1,6 @@
 # Code Review Guide for Zenith (iOS / SwiftUI)
 
-This guide is for agents and developers reviewing code submitted to the Zenith project. It covers what to look for, common pitfalls, and project-specific conventions derived from [CLAUDE.md](./CLAUDE.md).
+This guide is for agents and developers reviewing code submitted to the Zenith project. It covers what to look for, common pitfalls, and project-specific conventions derived from [AGENTS.md](./AGENTS.md).
 
 ---
 

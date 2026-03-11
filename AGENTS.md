@@ -81,6 +81,11 @@ Zenith/
 
 ## Contributing
 - **Before opening any PR**, fetch and follow the review-bot contributing guide by running: `gh api repos/shamwow/review-bot/contents/CONTRIBUTING.md --jq .content | base64 -d` — this is the source of truth for the label-driven review workflow and PR requirements
+- Keep each PR focused on a single feature or fix. Split unrelated work into separate PRs instead of bundling changes together.
+- Use smaller, logical commits when applicable so the review history is easy to follow. Avoid large mixed-purpose commits when the work can be separated cleanly.
+- Every PR must include a test plan that explains exactly how the change was validated.
+- For UI changes, include a screenshot or screen recording showing the behavior in the iOS simulator or web browser.
+- If a feature cannot be fully tested by the author or agent, call that out explicitly in the test plan and mark it as requiring human approval.
 
 ## DO NOT
 - Use deprecated APIs (UIKit when SwiftUI suffices)
