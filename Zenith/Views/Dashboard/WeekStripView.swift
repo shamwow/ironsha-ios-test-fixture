@@ -160,6 +160,7 @@ struct WeekStripView: View {
                 dayColumn(for: day)
                     .frame(maxWidth: .infinity)
                     .contentShape(Rectangle())
+                    .accessibilityIdentifier("day_\(day.dayNumber)")
                     .onTapGesture {
                         guard !isFuture, !isAnimating else { return }
                         visualSelection = day
