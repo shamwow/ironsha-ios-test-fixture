@@ -8,7 +8,7 @@
     "baseBranch": "main",
     "title": ""
   },
-  "label": "bot-changes-needed",
+  "label": "human-review-needed",
   "checkoutPath": "/private/var/folders/4r/k9h0g_v97h5fb3tcpfdxdkrr0000gn/T/ironsha-orchestrate-live-wVQ239/repo/.worktrees/orchestrate-1774477061307",
   "reviews": [
     {
@@ -75,9 +75,17 @@
         }
       ],
       "createdAt": "2026-03-25T22:17:42.231Z"
+    },
+    {
+      "id": "01ec6910-6aaf-4cf6-83b4-30e7b87403e0",
+      "body": "Mock review approval after follow-up.",
+      "event": "APPROVE",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-25T22:17:42.905Z"
     }
   ],
   "createdAt": "2026-03-25T22:17:41.832Z",
-  "updatedAt": "2026-03-25T22:17:42.696Z",
+  "updatedAt": "2026-03-25T22:17:42.905Z",
   "description": "**Summary**\n- Complete the requested task in `src/task.txt`\n\n**Test plan**\n- Run `node scripts/verify-task.js`"
 }
