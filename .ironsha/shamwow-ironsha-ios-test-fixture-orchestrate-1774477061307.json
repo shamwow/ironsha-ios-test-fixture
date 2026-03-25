@@ -8,9 +8,76 @@
     "baseBranch": "main",
     "title": ""
   },
-  "label": "bot-review-needed",
+  "label": "bot-changes-needed",
   "checkoutPath": "/private/var/folders/4r/k9h0g_v97h5fb3tcpfdxdkrr0000gn/T/ironsha-orchestrate-live-wVQ239/repo/.worktrees/orchestrate-1774477061307",
-  "reviews": [],
+  "reviews": [
+    {
+      "id": "d1a199b1-c0af-439d-9578-bb0b4441d96c",
+      "body": "Mock review requests follow-up changes.",
+      "event": "REQUEST_CHANGES",
+      "author": "ironsha-bot",
+      "comments": [
+        {
+          "id": "62515283-cbad-44d4-a003-438114fdb3bf",
+          "path": "src/task.txt",
+          "line": 1,
+          "body": "Clarify the completed task wording before merge.",
+          "author": "ironsha-bot",
+          "reactions": [
+            {
+              "content": "rocket",
+              "author": "ironsha-bot",
+              "createdAt": "2026-03-25T22:17:42.555Z"
+            },
+            {
+              "content": "+1",
+              "author": "ironsha-bot",
+              "createdAt": "2026-03-25T22:17:42.555Z"
+            }
+          ],
+          "replies": [
+            {
+              "id": "d5da6caa-c1d1-449b-a343-5dccf34d7919",
+              "body": "Addressed review thread 62515283-cbad-44d4-a003-438114fdb3bf with the requested follow-up changes.",
+              "author": "ironsha-bot",
+              "createdAt": "2026-03-25T22:17:42.485Z"
+            }
+          ],
+          "createdAt": "2026-03-25T22:17:42.231Z"
+        },
+        {
+          "id": "bb85e4ce-44b0-4c9d-ae25-2b2023e8b480",
+          "path": "src/task.txt",
+          "line": 999,
+          "body": "Add a follow-up note for reviewers. [fallback-thread]",
+          "author": "ironsha-bot",
+          "reactions": [
+            {
+              "content": "rocket",
+              "author": "ironsha-bot",
+              "createdAt": "2026-03-25T22:17:42.696Z"
+            },
+            {
+              "content": "+1",
+              "author": "ironsha-bot",
+              "createdAt": "2026-03-25T22:17:42.696Z"
+            }
+          ],
+          "replies": [
+            {
+              "id": "ee40d054-1668-40c5-8fd2-67a51f1d824a",
+              "body": "Addressed review thread bb85e4ce-44b0-4c9d-ae25-2b2023e8b480 with the requested follow-up changes.",
+              "author": "ironsha-bot",
+              "createdAt": "2026-03-25T22:17:42.625Z"
+            }
+          ],
+          "createdAt": "2026-03-25T22:17:42.231Z"
+        }
+      ],
+      "createdAt": "2026-03-25T22:17:42.231Z"
+    }
+  ],
   "createdAt": "2026-03-25T22:17:41.832Z",
-  "updatedAt": "2026-03-25T22:17:41.901Z"
+  "updatedAt": "2026-03-25T22:17:42.696Z",
+  "description": "**Summary**\n- Complete the requested task in `src/task.txt`\n\n**Test plan**\n- Run `node scripts/verify-task.js`"
 }
