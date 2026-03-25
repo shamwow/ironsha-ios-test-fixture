@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "pr": {
+    "owner": "shamwow",
+    "repo": "ironsha-ios-test-fixture",
+    "number": 0,
+    "branch": "orchestrate-1774482401350",
+    "baseBranch": "main",
+    "title": ""
+  },
+  "label": "bot-review-needed",
+  "passLabels": [],
+  "checkoutPath": "/private/var/folders/4r/k9h0g_v97h5fb3tcpfdxdkrr0000gn/T/ironsha-orchestrate-live-YsIWz0/repo/.worktrees/orchestrate-1774482401350",
+  "reviews": [],
+  "createdAt": "2026-03-25T23:46:41.959Z",
+  "updatedAt": "2026-03-25T23:46:42.029Z"
+}
