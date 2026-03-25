@@ -8,8 +8,11 @@
     "baseBranch": "main",
     "title": ""
   },
-  "label": "bot-changes-needed",
-  "passLabels": [],
+  "label": "bot-review-needed",
+  "passLabels": [
+    "agent-code-review-passed",
+    "agent-qa-review-passed"
+  ],
   "checkoutPath": "/private/var/folders/4r/k9h0g_v97h5fb3tcpfdxdkrr0000gn/T/ironsha-orchestrate-live-aSMjm2/repo/.worktrees/orchestrate-1774479399033",
   "reviews": [
     {
@@ -76,9 +79,25 @@
         }
       ],
       "createdAt": "2026-03-25T22:56:40.023Z"
+    },
+    {
+      "id": "eadbc093-2fd4-4854-ba3c-4a8d7b51852e",
+      "body": "Mock review approval after follow-up.",
+      "event": "COMMENT",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-25T22:56:40.765Z"
+    },
+    {
+      "id": "dc4ec832-b02b-48c2-b450-36ed30d3daec",
+      "body": "Mock QA approval after validating the feature end to end.",
+      "event": "COMMENT",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-25T22:56:41.158Z"
     }
   ],
   "createdAt": "2026-03-25T22:56:39.624Z",
-  "updatedAt": "2026-03-25T22:56:40.557Z",
+  "updatedAt": "2026-03-25T22:56:41.159Z",
   "description": "**Summary**\n- Complete the requested task in `src/task.txt`\n\n**Test plan**\n- Run `node scripts/verify-task.js`"
 }
