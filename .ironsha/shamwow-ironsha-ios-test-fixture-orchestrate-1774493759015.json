@@ -8,8 +8,11 @@
     "baseBranch": "main",
     "title": "Complete the requested task in src/task.txt"
   },
-  "label": "bot-changes-needed",
-  "passLabels": [],
+  "label": "bot-review-needed",
+  "passLabels": [
+    "agent-code-review-passed",
+    "agent-qa-review-passed"
+  ],
   "checkoutPath": "/private/var/folders/4r/k9h0g_v97h5fb3tcpfdxdkrr0000gn/T/ironsha-orchestrate-live-lZcXmS/repo/.worktrees/orchestrate-1774493759015",
   "reviews": [
     {
@@ -77,9 +80,27 @@
         }
       ],
       "createdAt": "2026-03-26T02:55:59.972Z"
+    },
+    {
+      "id": "94f7ffbc-60c2-4e81-8faa-6a5e9a8fe208",
+      "phase": "code",
+      "body": "Mock review approval after follow-up.",
+      "event": "COMMENT",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-26T02:56:00.733Z"
+    },
+    {
+      "id": "0576b5fe-f127-4f3c-8117-b4fe7d0f5509",
+      "phase": "qa",
+      "body": "Mock QA approval after validating the feature end to end.",
+      "event": "COMMENT",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-26T02:56:01.129Z"
     }
   ],
   "createdAt": "2026-03-26T02:55:59.561Z",
-  "updatedAt": "2026-03-26T02:56:00.517Z",
+  "updatedAt": "2026-03-26T02:56:01.130Z",
   "description": "**Summary**\n- Complete the requested task in `src/task.txt`\n\n**Test plan**\n- Run `node scripts/verify-task.js`\n\n**Visual evidence**\n- Screenshot: ![Mock UI screenshot](./.ironsha/pr-media/orchestrate-1774493759015/mock-ui-screenshot.png)\n- Video: [Mock UI demo recording](./.ironsha/pr-media/orchestrate-1774493759015/mock-ui-demo.mp4)"
 }
