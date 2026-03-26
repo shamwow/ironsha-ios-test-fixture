@@ -1,0 +1,3 @@
+{"type":"session.started"}
+{"type":"message","role":"assistant","content":[{"type":"output_text","text":"{\"title\":\"Complete the requested task in src/task.txt\",\"body\":\"**Summary**\\n- Complete the requested task in `src/task.txt`\\n\\n**Test plan**\\n- Run `node scripts/verify-task.js`\\n\\n**Visual evidence**\\n- Screenshot: ![Mock UI screenshot](./.ironsha/pr-media/mock-ui-screenshot.png)\\n- Video: [Mock UI demo recording](./.ironsha/pr-media/mock-ui-demo.mp4)\"}"}]}
+{"type":"session.completed"}
