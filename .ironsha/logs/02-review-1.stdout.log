@@ -1,0 +1,3 @@
+{"type":"session.started"}
+{"type":"message","role":"assistant","content":[{"type":"output_text","text":"# Implementation Plan\n\n1. Update src/task.txt so the requested task is complete.\n2. Keep scripts/verify-task.js passing against the new output."}]}
+{"type":"session.completed"}
