@@ -8,7 +8,10 @@
     "baseBranch": "main",
     "title": "Complete the requested task in src/task.txt"
   },
-  "passLabels": [],
+  "passLabels": [
+    "code-review-passed",
+    "qa-review-passed"
+  ],
   "checkoutPath": "/private/var/folders/4r/k9h0g_v97h5fb3tcpfdxdkrr0000gn/T/ironsha-orchestrate-live-ACOuNt/repo/.worktrees/orchestrate-1774504877605",
   "reviews": [
     {
@@ -75,9 +78,25 @@
         }
       ],
       "createdAt": "2026-03-26T06:01:18.513Z"
+    },
+    {
+      "id": "d2c26b08-4db9-4a74-923f-5930860ac18e",
+      "phase": "code",
+      "event": "APPROVE",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-26T06:01:19.365Z"
+    },
+    {
+      "id": "1fd2c1a3-9fd4-4a03-b8c7-7c9dc5b0e683",
+      "phase": "qa",
+      "event": "APPROVE",
+      "author": "ironsha-bot",
+      "comments": [],
+      "createdAt": "2026-03-26T06:01:19.818Z"
     }
   ],
   "createdAt": "2026-03-26T06:01:18.300Z",
-  "updatedAt": "2026-03-26T06:01:19.124Z",
+  "updatedAt": "2026-03-26T06:01:19.819Z",
   "description": "**Summary**\n- Complete the requested task in `src/task.txt`\n\n**Test plan**\n- Run `node scripts/verify-task.js`\n\n**Visual evidence**\n- Screenshot: ![Mock UI screenshot](./.ironsha/pr-media/mock-ui-screenshot.png)\n- Video: [Mock UI demo recording](./.ironsha/pr-media/mock-ui-demo.mp4)"
 }
