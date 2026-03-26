@@ -1,0 +1,3 @@
+{"type":"session.started"}
+{"type":"message","role":"assistant","content":[{"type":"output_text","text":"```json\n{\"threads_addressed\":[{\"thread_id\":\"907b0e4a-31fc-4505-a7eb-12db6facb588\",\"explanation\":\"Addressed review thread 907b0e4a-31fc-4505-a7eb-12db6facb588 with the requested follow-up changes.\"},{\"thread_id\":\"418312cb-39e4-46fa-ab41-9a72352696cc\",\"explanation\":\"Addressed review thread 418312cb-39e4-46fa-ab41-9a72352696cc with the requested follow-up changes.\"}]}\n```"}]}
+{"type":"session.completed"}
