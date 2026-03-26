@@ -1,0 +1,3 @@
+{"type":"session.started"}
+{"type":"message","role":"assistant","content":[{"type":"output_text","text":"```json\n{\"event\":\"REQUEST_CHANGES\",\"comments\":[{\"path\":\"src/task.txt\",\"line\":1,\"body\":\"Clarify the completed task wording before merge.\"},{\"path\":\"src/task.txt\",\"line\":999,\"body\":\"Add a follow-up note for reviewers. [fallback-thread]\"}]}\n```"}]}
+{"type":"session.completed"}
